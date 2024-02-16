@@ -87,7 +87,8 @@ MVC: The problem domain of the app can be modeled in a way which makes MVC a goo
 
 
 ### Use Cases
-> _Place a use case diagram here._
+<img src="./assets/Use_Case_Diagram.png" alt="drawing" width="600" height="800" style="display: block;margin-left: auto;margin-right: auto;"/>
+
 > _Describe your use case diagram._
 
 
