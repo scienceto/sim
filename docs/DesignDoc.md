@@ -87,8 +87,10 @@ MVC: The problem domain of the app can be modeled in a way which makes MVC a goo
 
 
 ### Use Cases
-> _Place a use case diagram here._
-> _Describe your use case diagram._
+<img src="./assets/Use_Case_Diagram.png" alt="drawing" width="600" height="800" style="display: block;margin-left: auto;margin-right: auto;"/>
+
+The interactions between users and the inventory management system are shown in the use case diagram. It covers routine tasks like managing region, warehouse, and product information, as well as SSO login. It also includes inventory management activities including providing notifications, recommending dispatch plans, and keeping track of inventory levels. It displays adding, monitoring, and fulfilling orders as well as creating bills and offering sales analysis for sales. This demonstrates how different user roles use the system to carry out their responsibilities. The use case diagram summarises the key user interactions with the inventory management system and offers a visual depiction of every MVP component mentioned above.
+
 
 
 ### Class Diagram
