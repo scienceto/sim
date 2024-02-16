@@ -4,7 +4,7 @@
 ## Team Information
 * Team name: Group 6
 * Team members
-  * Mukadam, Uzair, umm7905
+  * Mukadam, Uzair, umm7905, GitHub ID: uzairmukadam
   * Naik, Praneet Santosh, pn3270
   * Patel, Jheel Nikulkumar, jp9959, GitHub ID: pateljheel
   * Setpal, Ayush, as8675
