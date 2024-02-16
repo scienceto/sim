@@ -83,7 +83,8 @@ MVC: The problem domain of the app can be modeled in a way which makes MVC a goo
 4. Collaboration due to separation of concerns.
 5. Better UI/UX due to separation of View component from business logic.
 
-![Software Architecture](./assets/MVC_Diagram.png "Software Architecture")
+<img src="./assets/MVC_Diagram.png" alt="drawing" width="400" style="display: block;margin-left: auto;margin-right: auto;"/>
+
 
 ### Use Cases
 > _Place a use case diagram here._
