@@ -1,6 +1,7 @@
 // Import Sequelize and define connection
 const { Sequelize, DataTypes } = require('sequelize');
-const process = require('node:process');
+require('dotenv').config();
+//const process = require('node:process');
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
     host: process.env.DB_HOST,
@@ -100,7 +101,7 @@ const Purchase = sequelize.define('Purchase', {
     timestamps: false,
 });
 Purchase.belongsTo(Supplier, { foreignKey: 'supplier' });
-Purchase.belongsTo(AppUser, { foreignKey: 'appUser' });
+Purchase.belongsTo(AppUser, { foreignKey: 'appuser' });
 
 const Sale = sequelize.define('Sale', {
     id: {
@@ -122,7 +123,7 @@ const Sale = sequelize.define('Sale', {
     timestamps: false,
 });
 Sale.belongsTo(Customer, { foreignKey: 'customer' });
-Sale.belongsTo(AppUser, { foreignKey: 'appUser' });
+Sale.belongsTo(AppUser, { foreignKey: 'appuser' });
 
 const Product = sequelize.define('Product', {
     id: {
