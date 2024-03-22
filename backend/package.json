@@ -7,19 +7,23 @@
     "doc": "docs"
   },
   "scripts": {
-    "seedData": "export $(grep -v '^#' .env | xargs) && node tests/seedData.js",
-    "test": "export $(grep -v '^#' .env | xargs) && node tests/modelTest.js"
+    "seedData": "export $(grep -v '^#' .env | xargs) && node db/seedData.js",
+    "start": "export $(grep -v '^#' .env | xargs) && nodemon index.js",
+    "test": "npm run seedData && export $(grep -v '^#' .env | xargs) && jest --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1581.0",
-    "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "pg": "^8.11.3",
-    "sequelize": "^6.37.1",
-    "sequelize-cli": "^6.6.2"
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sequelize-cli": "^6.6.2",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.4"
   }
 }

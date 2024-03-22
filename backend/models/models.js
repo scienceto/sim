@@ -1,11 +1,18 @@
 // Import Sequelize and define connection
 const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
-//const process = require('node:process');
+
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     dialect: 'postgres',
     host: process.env.DB_HOST,
 });
+
+sequelize.authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 const AppUser = sequelize.define('AppUser', {
     id: {
@@ -31,7 +38,7 @@ const AppUser = sequelize.define('AppUser', {
         allowNull: false,
     },
 }, {
-    tableName: "appuser",
+    tableName: "app_user",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
 
@@ -100,8 +107,8 @@ const Purchase = sequelize.define('Purchase', {
     tableName: "purchase",
     timestamps: false,
 });
-Purchase.belongsTo(Supplier, { foreignKey: 'supplier' });
-Purchase.belongsTo(AppUser, { foreignKey: 'appuser' });
+Purchase.belongsTo(Supplier, { foreignKey: 'supplier', onDelete: 'CASCADE' });
+Purchase.belongsTo(AppUser, { foreignKey: 'app_user', onDelete: 'CASCADE' });
 
 const Sale = sequelize.define('Sale', {
     id: {
@@ -122,8 +129,8 @@ const Sale = sequelize.define('Sale', {
     tableName: "sale",
     timestamps: false,
 });
-Sale.belongsTo(Customer, { foreignKey: 'customer' });
-Sale.belongsTo(AppUser, { foreignKey: 'appuser' });
+Sale.belongsTo(Customer, { foreignKey: 'customer', onDelete: 'CASCADE' });
+Sale.belongsTo(AppUser, { foreignKey: 'app_user', onDelete: 'CASCADE' });
 
 const Product = sequelize.define('Product', {
     id: {
@@ -143,11 +150,11 @@ const Product = sequelize.define('Product', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    purchasePrice: {
+    purchase_price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
-    salePrice: {
+    sale_price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
@@ -171,12 +178,12 @@ const TradeRecord = sequelize.define('TradeRecord', {
         allowNull: false,
     },
 }, {
-    tableName: "traderecord",
+    tableName: "trade_record",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
-TradeRecord.belongsTo(Product, { foreignKey: 'product' });
-TradeRecord.belongsTo(Purchase, { foreignKey: 'purchase' });
-TradeRecord.belongsTo(Sale, { foreignKey: 'sale' });
+TradeRecord.belongsTo(Product, { foreignKey: 'product', onDelete: 'CASCADE' });
+TradeRecord.belongsTo(Purchase, { foreignKey: 'purchase', onDelete: 'CASCADE' });
+TradeRecord.belongsTo(Sale, { foreignKey: 'sale', onDelete: 'CASCADE' });
 
 const Warehouse = sequelize.define('Warehouse', {
     id: {
@@ -208,11 +215,11 @@ const ProductInventory = sequelize.define('ProductInventory', {
         allowNull: false,
     },
 }, {
-    tableName: "productinventory",
+    tableName: "product_inventory",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
-ProductInventory.belongsTo(Product, { foreignKey: 'product' });
-ProductInventory.belongsTo(Warehouse, { foreignKey: 'warehouse' });
+ProductInventory.belongsTo(Product, { foreignKey: 'product', onDelete: 'CASCADE' });
+ProductInventory.belongsTo(Warehouse, { foreignKey: 'warehouse', onDelete: 'CASCADE' });
 
 module.exports = {
     sequelize,
