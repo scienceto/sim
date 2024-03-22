@@ -25,4 +25,4 @@
 - `jest` is used for implementing unit tests.
 
 Following image shows the expected test case output for the product API.
-![](/home/jheel/Desktop/sim/docs/assets/Product_API_Test.png)
+![](../docs/assets/Product_API_Test.png)
