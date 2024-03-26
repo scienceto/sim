@@ -9,7 +9,7 @@
   "scripts": {
     "seedData": "export $(grep -v '^#' .env | xargs) && node db/seedData.js",
     "start": "export $(grep -v '^#' .env | xargs) && nodemon index.js",
-    "test": "export $(grep -v '^#' .env | xargs) && npm run seedData && jest --detectOpenHandles",
+    "test": "npm run seedData && jest --detectOpenHandles",
     "test-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && node db/seedData.js && jest --detectOpenHandles"
   },
   "author": "",
