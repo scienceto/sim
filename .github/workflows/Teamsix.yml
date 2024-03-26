@@ -20,5 +20,5 @@ jobs:
     - name: Install dependencies
       working-directory: ./backend
       run: npm install
-    -name: Run Tests
+    - name: Run Tests
       run: npm run test-windows
