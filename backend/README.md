@@ -12,6 +12,8 @@
 
 ## Run Test Script
 
+0. Before you run the test cases, you need to setup postgres database and put the appropriate values in `.env` file. Then run `export $(grep -v '^#' .env | xargs)` if running on linux or `(for /F \"tokens=*\" %i in (.env) do set %i)` if running on windows, in the same shell/command prompt.
+
 1. Run test script defined in `package.json` using the following command.
     ```bash
    npm test
@@ -26,3 +28,7 @@
 
 Following image shows the expected test case output for the product API.
 ![](../docs/assets/Product_API_Test.png)
+
+## GitHub Actions for Test Case
+
+- Github workflow is configured to test the unittests in GitHub actions. The workflow first setups a postgres service which is accessible from the runner job where we use the same commands as above to run the test cases.
