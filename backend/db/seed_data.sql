@@ -34,7 +34,8 @@ VALUES
 INSERT INTO product (name, category, description, purchase_price, sale_price)
 VALUES
     ('Product 1', 'Category 1', 'Description for Product 1', 10.50, 15.00),
-    ('Product 2', 'Category 2', 'Description for Product 2', 20.25, 30.00);
+    ('Product 2', 'Category 2', 'Description for Product 2', 10.50, 15.00),
+    ('Product 3', 'Category 3', 'Description for Product 3', 20.25, 30.00);
 
 -- Seed data for TRADE_RECORD table
 INSERT INTO trade_record (product, quantity, price, purchase, sale)
