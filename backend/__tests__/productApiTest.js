@@ -26,11 +26,11 @@ describe('Product Routes', () => {
 
     // Test getting a product
     it('should get the product with id=1', async () => {
-        const response = await request(baseUrl).get('/products/2');
+        const response = await request(baseUrl).get('/products/1');
         // Expected response mush be 200 (successfully get)
         expect(response.status).toBe(200);
         // Expected product name must match
-        expect(response.body.name).toBe("Product 2");
+        expect(response.body.name).toBe("Product 1");
     });
 
     // Test adding a product
