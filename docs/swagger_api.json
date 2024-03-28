@@ -1,0 +1,815 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "description": "SwaggerHub API Auto Mocking",
+      "url": "https://virtserver.swaggerhub.com/UzairMukadam/Inventory_Management/1.0.0"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Inventory Management Project",
+    "description": "This is an example of using OAuth2 Access Code Flow in a specification to describe security to your API."
+  },
+  "security": [
+    {
+      "accessCode": [
+        "read",
+        "write"
+      ]
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Get all users",
+        "description": "This operation returns all the users in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Users retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new user",
+        "description": "This operation adds a new user to the database.",
+        "requestBody": {
+          "description": "User data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "status_active": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "User added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/user/{uid}": {
+      "get": {
+        "summary": "Get the user using the id",
+        "description": "This operation returns the user using uid.",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "User retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update the user",
+        "description": "This operation updates the user based on uid in the database.",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User data to be updated.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "status_active": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "User updated successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/warehouse": {
+      "get": {
+        "summary": "Get all the warehouses",
+        "description": "This operation returns all the warehouses in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Warehouses retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new warehouse",
+        "description": "This operation adds a new warehouse to the database.",
+        "requestBody": {
+          "description": "warehouse data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "status_active": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Warehouse added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/warehouse/{warehouse_id}": {
+      "get": {
+        "summary": "Get the warehouse using the warehouse_id",
+        "description": "This operation returns the warehouse using the warehouse_id from the database.",
+        "parameters": [
+          {
+            "name": "warehouse_id",
+            "in": "path",
+            "description": "Warehouse ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Warehouse retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update the warehouse",
+        "description": "This operation updates the warehouse based on the warehouse_id.",
+        "parameters": [
+          {
+            "name": "warehouse_id",
+            "in": "path",
+            "description": "Warehouse ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Warehouse data to be updated.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "status_active": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Warehouse updated successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "summary": "Get all the products",
+        "description": "This operation returns all the products in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Products retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new product",
+        "description": "This operation adds a new product to the database.",
+        "requestBody": {
+          "description": "Product data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "purchase_price": {
+                    "type": "number"
+                  },
+                  "sale_price": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Product added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/product/{product_id}": {
+      "get": {
+        "summary": "Get the product using the product_id",
+        "description": "This operation returns the product using the product_id.",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Product retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update the product",
+        "description": "This operation updates the product based on the product_id.",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Product data to be updated.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "purchase_price": {
+                    "type": "number"
+                  },
+                  "sale_price": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Product updated successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/supplier": {
+      "get": {
+        "summary": "Get all the suppliers",
+        "description": "This operation returns all the suppliers in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Suppliers retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new supplier",
+        "description": "This operation adds a new supplier to the database.",
+        "requestBody": {
+          "description": "Supplier data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Supplier added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/supplier/{supplier_id}": {
+      "get": {
+        "summary": "Get the supplier using the supplier_id",
+        "description": "This operation returns the supplier using the supplier_id.",
+        "parameters": [
+          {
+            "name": "supplier_id",
+            "in": "path",
+            "description": "Supplier ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Supplier retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update the supplier",
+        "description": "This operation updates the supplier based on the supplier_id.",
+        "parameters": [
+          {
+            "name": "supplier_id",
+            "in": "path",
+            "description": "Supplier ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Supplier data to be updated.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Supplier updated successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/customer": {
+      "get": {
+        "summary": "Get all the customers",
+        "description": "This operation returns all the customers in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Customer retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new customer",
+        "description": "This operation adds a new customer to the database.",
+        "requestBody": {
+          "description": "Customer data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Customer added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/customer/{customer_id}": {
+      "get": {
+        "summary": "Get the customer using the customer_id",
+        "description": "This operation returns the customer using the customer_id.",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Customer ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Customer retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update the customer",
+        "description": "This operation updates the customer based on the customer_id.",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "description": "Customer ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Customer data to be updated.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Customer updated successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/purchase": {
+      "get": {
+        "summary": "Get all the purchases",
+        "description": "This operation returns all the purchases in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Purchases retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new purchase",
+        "description": "This operation adds a new purchase to the database.",
+        "requestBody": {
+          "description": "Purchase data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "user_id": {
+                    "type": "string"
+                  },
+                  "trade_record": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Purchase added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/purchase/{purchase_id}": {
+      "get": {
+        "summary": "Get the purchase using the purchase_id",
+        "description": "This operation returns the purchase using the purchase_id.",
+        "parameters": [
+          {
+            "name": "purchase_id",
+            "in": "path",
+            "description": "Purchase ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Purchase retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/sale": {
+      "get": {
+        "summary": "Get all the sales",
+        "description": "This operation returns all the sales in the database.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Sales retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new sale",
+        "description": "This operation adds a new sale to the database.",
+        "requestBody": {
+          "description": "Sale data to be created.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "user_id": {
+                    "type": "string"
+                  },
+                  "trade_record": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Customer added successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    },
+    "/sale/{sale_id}": {
+      "get": {
+        "summary": "Get the sale using the sale_id",
+        "description": "This operation returns the sale using the sale_id.",
+        "parameters": [
+          {
+            "name": "sale_id",
+            "in": "path",
+            "description": "Sale ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Sale retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "accessCode": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://example.com/oauth/auth",
+            "tokenUrl": "http://example.com/oauth/token",
+            "scopes": {
+              "write": "allows modifying resources",
+              "read": "allows reading resources"
+            }
+          }
+        }
+      }
+    }
+  }
+}
