@@ -1,10 +1,18 @@
 name: Test Case Workflow
+
+# Define when this workflow should run
 on: push
 
+# Define the jobs to be executed in this workflow
 jobs:
+  # Define the first job named "runner-job"
   runner-job:
+    # Define the operating system for the job
     runs-on: ubuntu-latest
+
+    # Define services that are required for the job
     services:
+      # Define a PostgreSQL service
       postgres:
         image: postgres
         env:
@@ -17,33 +25,29 @@ jobs:
         ports:
           - 5432:5432
 
+    # Define the steps to be executed in the job
     steps:
-      # Downloads a copy of the code in your repository before running CI tests
+      # Step to check out the code repository
       - name: Check out repository code
         uses: actions/checkout@v4
         
-      # Setup Node.js runtime
+      # Step to set up Node.js runtime
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20' # specify the version of Node.js you want to use
+          node-version: '20' # Specify the version of Node.js
 
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
+      # Step to install project dependencies
       - name: Install dependencies
         working-directory: ./backend
         run: npm install
 
-      - name: Connect to PostgreSQL
+      # Step to connect to PostgreSQL and run tests
+      - name: Run unittests
         working-directory: ./backend
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
         run: npm run test
-        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
-          # The hostname used to communicate with the PostgreSQL service container
           DB_HOST: localhost
-          # The default PostgreSQL port
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
           DB_NAME: postgres
