@@ -1,0 +1,31 @@
+{
+  "name": "ims",
+  "version": "1.0.0",
+  "description": "Inventory Management System ",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "setEnv": "export $(grep -v '^#' .env | xargs)",
+    "setEnvWindows": "(for /F \"tokens=*\" %i in (.env) do set %i)",
+    "seedData": "node db/seedData.js",
+    "start": "nodemon index.js",
+    "test": "npm run seedData && jest __tests__/productApiTest.js --detectOpenHandles && jest __tests__/purchaseApiTest.js --detectOpenHandles && jest __tests__/saleApiTest.js --detectOpenHandles"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sequelize-cli": "^6.6.2",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.4"
+  }
+}
