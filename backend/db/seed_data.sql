@@ -21,8 +21,8 @@ VALUES
 -- Seed data for PURCHASE table
 INSERT INTO purchase (supplier, app_user, status)
 VALUES
-    (1, 1, 'pending'),
-    (2, 2, 'completed');
+    (1, 1, 'PENDING'),
+    (2, 2, 'COMPLETED');
 
 -- Seed data for SALE table
 INSERT INTO sale (customer, app_user, status)

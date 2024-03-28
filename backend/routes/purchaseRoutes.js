@@ -3,9 +3,9 @@ const router = ex.Router();
 const purchaseController = require('../controller/purchaseController');
 
 
-router.post('/purchase', purchaseController.addPurchase);
-router.get('/purchase', purchaseController.listPurchases);
-router.get('/purchase/:id', purchaseController.getPurchase);
+router.post('/', purchaseController.addPurchase);
+router.get('/', purchaseController.listPurchases);
+router.get('/:id', purchaseController.getPurchase);
 
 
 module.exports = router;

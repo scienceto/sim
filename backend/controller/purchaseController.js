@@ -2,10 +2,12 @@ const { Purchase } = require('../models/models');
 
 const addPurchase = async (req, res) => {
     try {
-        const { timestamp, status } = req.body;
+        const { timestamp, status, supplier, app_user } = req.body;
         const newPurchase = await Purchase.create({
             timestamp,
-            status
+            status,
+            supplier,
+            app_user
         });
         return res.status(201).json(newPurchase);
     } catch (error) {

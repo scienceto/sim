@@ -2,10 +2,12 @@ const { Sale } = require('../models/models');
 
 const addSale = async (req, res) => {
     try {
-        const { timestamp, status } = req.body;
+        const { timestamp, status, customer, app_user } = req.body;
         const newSale = await Sale.create({
             timestamp,
-            status
+            status,
+            customer,
+            app_user
         });
         return res.status(201).json(newSale);
     } catch (error) {
