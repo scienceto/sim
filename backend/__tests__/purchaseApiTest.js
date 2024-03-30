@@ -39,7 +39,9 @@ describe('Purchase Routes', () => {
             timestamp: Date.now(),
             status: "PENDING",
             supplier: 1,
-            app_user: 2
+            app_user: 2,
+            warehouse: 1,
+            product: 2
         };
         // Add new purchase using POST method, defined in the routes
         const response = await request(app)

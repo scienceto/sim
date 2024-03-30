@@ -6,41 +6,51 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
     host: process.env.DB_HOST,
 });
 
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+const UserRole = sequelize.define('UserRole', {
+    id: {
+        type: DataTypes.STRING(50),
+        primaryKey: true
+    },
+    disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    metadata: {
+        type: DataTypes.TEXT
+    }
+}, {
+    tableName: "user_role",
+    timestamps: false
+});
 
 const AppUser = sequelize.define('AppUser', {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        unique: true,
+        type: DataTypes.STRING,
+        primaryKey: true
     },
     name: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    role: {
-        type: DataTypes.STRING(50),
+    disabled: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false
     },
     metadata: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.TEXT
     },
 }, {
     tableName: "app_user",
-    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+    timestamps: false
 });
+AppUser.belongsTo(UserRole, { foreignKey: {
+        name: 'role',
+        allowNull: true,
+    }, onDelete: 'SET NULL'
+});
+
 
 const Customer = sequelize.define('Customer', {
     id: {
@@ -49,16 +59,24 @@ const Customer = sequelize.define('Customer', {
         autoIncrement: true,
     },
     name: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING,
         allowNull: false,
+    },
+    contact_email: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     address: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     metadata: {
         type: DataTypes.TEXT,
-        allowNull: false,
     },
 }, {
     tableName: "customer",
@@ -72,6 +90,37 @@ const Supplier = sequelize.define('Supplier', {
         autoIncrement: true,
     },
     name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    contact_email: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    address: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    metadata: {
+        type: DataTypes.TEXT,
+    },
+}, {
+    tableName: "supplier",
+    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+});
+
+const Warehouse = sequelize.define('Warehouse', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    name: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
@@ -79,58 +128,36 @@ const Supplier = sequelize.define('Supplier', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     metadata: {
         type: DataTypes.TEXT,
-        allowNull: false,
     },
 }, {
-    tableName: "supplier",
+    tableName: 'warehouse', // Specify the table name if it's different from the model name
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
 
-const Purchase = sequelize.define('Purchase', {
+const ProductCategory = sequelize.define('ProductCategory', {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+        type: DataTypes.STRING(255),
+        primaryKey: true
     },
-    timestamp: {
-        type: DataTypes.DATE,
+    disabled: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: false
     },
-    status: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-    },
+    metadata: {
+        type: DataTypes.TEXT
+    }
 }, {
-    tableName: "purchase",
-    timestamps: false,
+    tableName: "product_category",
+    timestamps: false
 });
-Purchase.belongsTo(Supplier, { foreignKey: 'supplier', onDelete: 'CASCADE' });
-Purchase.belongsTo(AppUser, { foreignKey: 'app_user', onDelete: 'CASCADE' });
-
-const Sale = sequelize.define('Sale', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    timestamp: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
-    status: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-    },
-}, {
-    tableName: "sale",
-    timestamps: false,
-});
-Sale.belongsTo(Customer, { foreignKey: 'customer', onDelete: 'CASCADE' });
-Sale.belongsTo(AppUser, { foreignKey: 'app_user', onDelete: 'CASCADE' });
 
 const Product = sequelize.define('Product', {
     id: {
@@ -142,26 +169,57 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    category: {
-        type: DataTypes.STRING(255),
+    disabled: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false
     },
     description: {
         type: DataTypes.TEXT,
-        allowNull: false,
-    },
-    purchase_price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-    },
-    sale_price: {
-        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
 }, {
     tableName: "product",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
+Product.belongsTo(ProductCategory, { foreignKey: {
+        name: 'category',
+        allowNull: true,
+    }, onDelete: 'SET NULL'
+});
+
+const ProductInventory = sequelize.define('ProductInventory', {
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    // Define composite primary key consisting of foreign keys
+    product: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'product', // Name of the referenced model
+            key: 'id', // Name of the referenced key
+        },
+        onDelete: 'CASCADE',
+    },
+    warehouse: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'warehouse', // Name of the referenced model
+            key: 'id', // Name of the referenced key
+        },
+        onDelete: 'CASCADE',
+    },
+}, {
+    tableName: "product_inventory",
+    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+});
+ProductInventory.belongsTo(Product, { foreignKey: 'product' });
+ProductInventory.belongsTo(Warehouse, { foreignKey: 'warehouse' });
 
 const TradeRecord = sequelize.define('TradeRecord', {
     id: {
@@ -181,45 +239,103 @@ const TradeRecord = sequelize.define('TradeRecord', {
     tableName: "trade_record",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
 });
-TradeRecord.belongsTo(Product, { foreignKey: 'product', onDelete: 'CASCADE' });
-TradeRecord.belongsTo(Purchase, { foreignKey: 'purchase', onDelete: 'CASCADE' });
-TradeRecord.belongsTo(Sale, { foreignKey: 'sale', onDelete: 'CASCADE' });
+TradeRecord.belongsTo(Warehouse, { foreignKey: {
+        name: 'warehouse',
+        allowNull: false,
+    }
+});
+TradeRecord.belongsTo(Product, { foreignKey: {
+        name: 'product',
+        allowNull: false,
+    }
+});
 
-const Warehouse = sequelize.define('Warehouse', {
+const TradeStatus = sequelize.define('TradeStatus', {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    name: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        primaryKey: true
     },
-    address: {
-        type: DataTypes.TEXT,
+    disabled: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false
     },
+    metadata: {
+        type: DataTypes.TEXT
+    }
 }, {
-    tableName: 'warehouse', // Specify the table name if it's different from the model name
-    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+    tableName: "trade_status",
+    timestamps: false
 });
 
-const ProductInventory = sequelize.define('ProductInventory', {
+const Purchase = sequelize.define('Purchase', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    quantity: {
-        type: DataTypes.INTEGER,
+    timestamp: {
+        type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
+    metadata: {
+        type: DataTypes.TEXT
+    }
 }, {
-    tableName: "product_inventory",
-    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+    tableName: "purchase",
+    timestamps: false,
 });
-ProductInventory.belongsTo(Product, { foreignKey: 'product', onDelete: 'CASCADE' });
-ProductInventory.belongsTo(Warehouse, { foreignKey: 'warehouse', onDelete: 'CASCADE' });
+Purchase.belongsTo(Customer, { foreignKey: {
+        name: 'customer',
+        allowNull: false,
+    }
+});
+Purchase.belongsTo(TradeRecord, { foreignKey: {
+        name: 'trade_record',
+        allowNull: false,
+    }
+});
+Purchase.belongsTo(TradeStatus, { foreignKey: {
+        name: 'trade_status',
+        allowNull: false,
+    }
+});
+
+const Sale = sequelize.define('Sale', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    timestamp: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    },
+    metadata: {
+        type: DataTypes.TEXT
+    }
+}, {
+    tableName: "sale",
+    timestamps: false,
+});
+Sale.belongsTo(Supplier, { foreignKey: {
+        name: 'supplier',
+        allowNull: false,
+    }
+});
+Sale.belongsTo(TradeRecord, { foreignKey: {
+        name: 'trade_record',
+        allowNull: false,
+    }
+});
+Sale.belongsTo(TradeStatus, { foreignKey: {
+        name: 'trade_status',
+        allowNull: false,
+    }
+});
+
 
 module.exports = {
     sequelize,
@@ -232,5 +348,8 @@ module.exports = {
     Product,
     TradeRecord,
     Warehouse,
-    ProductInventory
+    ProductInventory,
+    UserRole,
+    ProductCategory,
+    TradeStatus
 };
