@@ -6,7 +6,7 @@ const listProducts = async (req, res) => {
     return res.status(200).json(products);
   } catch (error) {
     console.error('Error in listing products:', error);
-    return res.status(500).json({error: 'Error in adding product'});
+    return res.status(500).json({error: error.message});
   }
 };
 
@@ -20,7 +20,7 @@ const getProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     console.error('Error updating product:', error);
-    return res.status(500).json({error: 'Error updating product'});
+    return res.status(500).json({error: error.message});
   }
 };
 
@@ -51,7 +51,7 @@ const addProduct = async (req, res) => {
         }
     } catch (error) {
         console.error('Error in adding product:', error);
-        return res.status(500).json({error: 'Error in adding product'});
+        return res.status(500).json({error: error.message});
     }
 };
 
@@ -74,7 +74,7 @@ const updateProduct = async (req, res) => {
 
     } catch (error) {
         console.error('Error updating product:', error);
-        return res.status(500).json({error: 'Error updating product'});
+        return res.status(500).json({error: error.message});
     }
 };
 
@@ -90,7 +90,7 @@ const deleteProduct = async (req, res) => {
         return res.status(204).end();
     } catch (error) {
         console.error('Error deleting product:', error);
-        return res.status(500).json({error: 'Error deleting product'});
+        return res.status(500).json({error: error.message});
     }
 };
 

@@ -9,7 +9,7 @@
   "scripts": {
     "seedData": "node __tests__/dbSetup.js",
     "start": "nodemon index.js",
-    "test": "npm run seedData && jest __tests__/productApiTest.js --detectOpenHandles && jest __tests__/purchaseApiTest.js --detectOpenHandles"
+    "test": "npm run seedData && jest __tests__/productApiTest.js --detectOpenHandles && jest __tests__/purchaseApiTest.js --detectOpenHandles && jest __tests__/saleApiTest.js --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
