@@ -1,17 +1,30 @@
-const { Purchase, ProductInventory } = require('../models/models');
+const { sequelize, Purchase, ProductInventory, TradeRecord } = require('../models/models');
 
 const addPurchase = async (req, res) => {
     try {
-        const { timestamp, status, supplier, app_user, warehouse, product } = req.body;
-        const newPurchase = await Purchase.create({
-            timestamp,
-            status,
-            supplier,
-            app_user,
-            warehouse,
-            product
-        });
-        return res.status(201).json(newPurchase);
+        const { supplier, product, warehouse, quantity, price } = req.body;
+        const timestamp = Date.now();
+        const trade_status = "PENDING";
+        const t = await sequelize.transaction();
+        try {
+            const newTradeRecord = await TradeRecord.create({
+                quantity,
+                price,
+                warehouse,
+                product
+            });
+            const newPurchase = await Purchase.create({
+                timestamp,
+                trade_status,
+                supplier,
+                trade_record: newTradeRecord.id
+            });
+            await t.commit();
+            return res.status(201).json(newPurchase);
+        } catch (error) {
+            await t.rollback();
+            throw error;
+        }
     } catch (error) {
         console.error('Error in adding purchase:', error);
         return res.status(500).json({ error: 'Error in adding purchase' });

@@ -286,8 +286,8 @@ const Purchase = sequelize.define('Purchase', {
     tableName: "purchase",
     timestamps: false,
 });
-Purchase.belongsTo(Customer, { foreignKey: {
-        name: 'customer',
+Purchase.belongsTo(Supplier, { foreignKey: {
+        name: 'supplier',
         allowNull: false,
     }
 });
@@ -320,8 +320,8 @@ const Sale = sequelize.define('Sale', {
     tableName: "sale",
     timestamps: false,
 });
-Sale.belongsTo(Supplier, { foreignKey: {
-        name: 'supplier',
+Sale.belongsTo(Customer, { foreignKey: {
+        name: 'customer',
         allowNull: false,
     }
 });

@@ -69,7 +69,7 @@ describe('Product Routes', () => {
     // Test updating a product
     it('should update the product with id=1', async () => {
         const productId = '1'; // Replace with an existing product ID
-        const updatedProduct = { name: 'Updated Product', purchase_price: 150.99 };
+        const updatedProduct = { name: 'Updated Product' };
         // Update product using put method as defined in the routes
         const response = await request(app)
             .put(`/products/${productId}`)

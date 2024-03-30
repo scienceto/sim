@@ -62,14 +62,14 @@ db.sequelize.drop().then(() => {
 
             // Seed data for Purchase
             await db.Purchase.bulkCreate([
-                { timestamp: new Date(), customer: 1, trade_record: 1, trade_status: "PENDING" },
-                { timestamp: new Date(), customer: 2, trade_record: 2, trade_status: "COMPLETED" }
+                { timestamp: new Date(), supplier: 1, trade_record: 1, trade_status: "PENDING" },
+                { timestamp: new Date(), supplier: 2, trade_record: 2, trade_status: "COMPLETED" }
             ]);
 
             // Seed data for Sale
             await db.Sale.bulkCreate([
-                { timestamp: new Date(), supplier: 1, trade_record: 3, trade_status: "PENDING" },
-                { timestamp: new Date(), supplier: 2, trade_record: 4, trade_status: "COMPLETED" }
+                { timestamp: new Date(), customer: 1, trade_record: 3, trade_status: "PENDING" },
+                { timestamp: new Date(), customer: 2, trade_record: 4, trade_status: "COMPLETED" }
             ]);
 
             // Seed data for ProductInventory

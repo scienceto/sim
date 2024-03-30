@@ -1,4 +1,4 @@
-const {Product, Warehouse, ProductInventory} = require('../models/models');
+const {Product, Warehouse, ProductInventory, sequelize, TradeRecord, Purchase} = require('../models/models');
 
 const listProducts = async (req, res) => {
   try {
@@ -27,21 +27,28 @@ const getProduct = async (req, res) => {
 const addProduct = async (req, res) => {
     try {
         const {name, category, description, sale_price} = req.body;
-        const newProduct = await Product.create({
-            name,
-            category,
-            description,
-            sale_price
-        });
-        const warehouses = await Warehouse.findAll();
-        const promise = warehouses.map((warehouse) => {
-            ProductInventory.create({
-                product: newProduct.id,
-                quantity: 0,
-                warehouse: warehouse.id
+        const t = await sequelize.transaction();
+        try {
+            const newProduct = await Product.create({
+                name,
+                category,
+                description,
+                sale_price
             });
-        })
-        return res.status(201).json(newProduct);
+            const warehouses = await Warehouse.findAll();
+            const promise = warehouses.map((warehouse) => {
+                ProductInventory.create({
+                    product: newProduct.id,
+                    quantity: 0,
+                    warehouse: warehouse.id
+                });
+            })
+            await t.commit();
+            return res.status(201).json(newProduct);
+        } catch (error) {
+            await t.rollback();
+            throw error;
+        }
     } catch (error) {
         console.error('Error in adding product:', error);
         return res.status(500).json({error: 'Error in adding product'});
@@ -78,7 +85,8 @@ const deleteProduct = async (req, res) => {
         if (!product) {
             return res.status(404).json({error: 'Product not found'});
         }
-        await product.destroy();
+        product.disabled = true;
+        await product.save();
         return res.status(204).end();
     } catch (error) {
         console.error('Error deleting product:', error);
