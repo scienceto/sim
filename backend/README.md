@@ -22,9 +22,11 @@
 
 ## Test Cases Defined
 
-- Currently, test case for only one of the MVPs, managing product details, is implemented. 
+- Currently, test cases for the following MVPs have been implemented:
+  - Add a new product, update/delete existing products.
+  - Create/manage stocking orders.
 - All the current and future test cases are present in `__test__` directory.
-- `jest` is used for implementing unit tests.
+- `jest` framework is used for implementing unit tests.
 
 Following image shows the expected test case output for the product API.
 ![](../docs/assets/Product_API_Test.png)

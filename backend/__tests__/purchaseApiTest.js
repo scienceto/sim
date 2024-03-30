@@ -36,15 +36,27 @@ describe('Purchase Routes', () => {
     // Test adding a purchase
     it('should add a new purchase', async () => {
         const newPurchase = {
-            timestamp: Date.now(),
-            status: "PENDING",
             supplier: 1,
-            app_user: 2
+            warehouse: 1,
+            product: 2,
+            quantity: 5,
+            price: 400
         };
         // Add new purchase using POST method, defined in the routes
         const response = await request(app)
             .post('/purchases')
             .send(newPurchase);
+        expect(response.status).toBe(201);
+        // Returned purchase timestamp must match with the generated timestamp
+        // expect(response.body.timestamp).toBe(newPurchase.timestamp);
+    });
+
+    // Test fulfilling a purchase
+    it('should fulfill purchase with id 1 and update the respective product inventory', async () => {
+        // Add new purchase using POST method, defined in the routes
+        const response = await request(app)
+            .post('/purchases/1/fulfill')
+            .send({});
         expect(response.status).toBe(201);
         // Returned purchase timestamp must match with the generated timestamp
         // expect(response.body.timestamp).toBe(newPurchase.timestamp);

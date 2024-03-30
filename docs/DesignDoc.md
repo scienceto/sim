@@ -2,7 +2,7 @@
 # PROJECT Design Documentation
 
 ## Team Information
-* Team name: Group 6
+* Team name: LogiMasters
 * Team members
   * Mukadam, Uzair, umm7905, GitHub ID: uzairmukadam
   * Naik, Praneet Santosh, pn3270 GitHub ID: Praneet-26
