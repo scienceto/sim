@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, server, dbSync } = require('../index');
+const { app, server, dbSync } = require('../../index');
 
 const baseUrl = "http://localhost:3000";
 
