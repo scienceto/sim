@@ -53,24 +53,23 @@ db.sequelize.drop().then(() => {
                 { name: 'Warehouse 2', address: 'Address 2', disabled: false }
             ]);
 
-            // Seed data for TradeRecord
-            await db.TradeRecord.bulkCreate([
-                { quantity: 10, price: 100, warehouse: 1, product: 1 },
-                { quantity: 20, price: 200, warehouse: 2, product: 2 },
-                { quantity: 10, price: 100, warehouse: 1, product: 1 },
-                { quantity: 20, price: 200, warehouse: 2, product: 2 }
-            ]);
-
             // Seed data for Purchase
             await db.Purchase.bulkCreate([
-                { timestamp: new Date(), supplier: 1, trade_record: 1, trade_status: "PENDING" },
-                { timestamp: new Date(), supplier: 2, trade_record: 2, trade_status: "COMPLETED" }
+                { timestamp: "2024-04-04T21:19:55.943Z", supplier: 1, trade_status: "PENDING" },
             ]);
 
             // Seed data for Sale
             await db.Sale.bulkCreate([
-                { timestamp: new Date(), customer: 1, trade_record: 3, trade_status: "PENDING" },
-                { timestamp: new Date(), customer: 2, trade_record: 4, trade_status: "COMPLETED" }
+                { timestamp: new Date(), customer: 1, trade_status: "PENDING" },
+                { timestamp: new Date(), customer: 2, trade_status: "COMPLETED" }
+            ]);
+
+            // Seed data for TradeRecord
+            await db.TradeRecord.bulkCreate([
+                { quantity: 10, price: 100, warehouse: 1, product: 1, purchase: 1 },
+                { quantity: 20, price: 200, warehouse: 2, product: 2, purchase: 1 },
+                { quantity: 10, price: 100, warehouse: 1, product: 1, sale: 1 },
+                { quantity: 20, price: 200, warehouse: 2, product: 2, sale: 2 }
             ]);
 
             // Seed data for ProductInventory

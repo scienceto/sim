@@ -228,41 +228,6 @@ const ProductInventory = sequelize.define('ProductInventory', {
 ProductInventory.belongsTo(Product, { foreignKey: 'product' });
 ProductInventory.belongsTo(Warehouse, { foreignKey: 'warehouse' });
 
-const TradeRecord = sequelize.define('TradeRecord', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-    price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-}, {
-    tableName: "trade_record",
-    timestamps: false, // Disable timestamps (createdAt, updatedAt)
-});
-TradeRecord.belongsTo(Warehouse, { foreignKey: {
-        name: 'warehouse',
-        allowNull: false,
-    }
-});
-TradeRecord.belongsTo(Product, { foreignKey: {
-        name: 'product',
-        allowNull: false,
-    }
-});
-
 const TradeStatus = sequelize.define('TradeStatus', {
     id: {
         type: DataTypes.STRING(255),
@@ -304,11 +269,6 @@ Purchase.belongsTo(Supplier, { foreignKey: {
         allowNull: false,
     }
 });
-Purchase.belongsTo(TradeRecord, { foreignKey: {
-        name: 'trade_record',
-        allowNull: false,
-    }
-});
 Purchase.belongsTo(TradeStatus, { foreignKey: {
         name: 'trade_status',
         allowNull: false,
@@ -338,14 +298,54 @@ Sale.belongsTo(Customer, { foreignKey: {
         allowNull: false,
     }
 });
-Sale.belongsTo(TradeRecord, { foreignKey: {
-        name: 'trade_record',
-        allowNull: false,
-    }
-});
 Sale.belongsTo(TradeStatus, { foreignKey: {
         name: 'trade_status',
         allowNull: false,
+    }
+});
+
+const TradeRecord = sequelize.define('TradeRecord', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
+    },
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
+    },
+}, {
+    tableName: "trade_record",
+    timestamps: false, // Disable timestamps (createdAt, updatedAt)
+});
+TradeRecord.belongsTo(Warehouse, { foreignKey: {
+        name: 'warehouse',
+        allowNull: false,
+    }
+});
+TradeRecord.belongsTo(Product, { foreignKey: {
+        name: 'product',
+        allowNull: false,
+    }
+});
+TradeRecord.belongsTo(Purchase, { foreignKey: {
+        name: 'purchase',
+        allowNull: true,
+    }
+});
+TradeRecord.belongsTo(Sale, { foreignKey: {
+        name: 'sale',
+        allowNull: true,
     }
 });
 

@@ -1,6 +1,5 @@
 // Import the function to be tested
-const { notifyLowInventory } = require('../controller/notificationController');
-const process = require("process");
+const { notifyLowInventory } = require('../../controller/notificationController');
 
 // Mock the required modules
 jest.mock('aws-sdk', () => {

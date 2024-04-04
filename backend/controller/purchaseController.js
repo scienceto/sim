@@ -1,42 +1,30 @@
 const { sequelize, Purchase, ProductInventory, TradeRecord } = require('../models/models');
-
-const addPurchase = async (req, res) => {
-    try {
-        const { supplier, product, warehouse, quantity, price } = req.body;
-        const timestamp = Date.now();
-        const trade_status = "PENDING";
-        const t = await sequelize.transaction();
-        try {
-            const newTradeRecord = await TradeRecord.create({
-                quantity,
-                price,
-                warehouse,
-                product
-            });
-            const newPurchase = await Purchase.create({
-                timestamp,
-                trade_status,
-                supplier,
-                trade_record: newTradeRecord.id
-            });
-            await t.commit();
-            return res.status(201).json(newPurchase);
-        } catch (error) {
-            await t.rollback();
-            throw error;
-        }
-    } catch (error) {
-        console.error('Error in adding purchase:', error);
-        return res.status(500).json({ error: error.message });
-    }
-};
+const { Op } = require('sequelize');
 
 const listPurchases = async (req, res) => {
     try {
+        // Find all Purchase records with their associated TradeRecords
         const purchases = await Purchase.findAll();
-        return res.status(200).json(purchases);
+        const tradeRecords = await TradeRecord.findAll({
+            where: {
+                purchase: {
+                    [Op.ne]: null
+        }}});
+        const tradeRecordsMap = tradeRecords.reduce((map, record) => {
+            const purchaseId = record.purchase;
+            if (!map.has(purchaseId)) {
+                map.set(purchaseId, []);
+            }
+            map.get(purchaseId).push(record);
+            return map;
+        }, new Map());
+        const purchasesWithTradeRecords = purchases.map(purchase => ({
+            ...purchase.toJSON(), // Convert to plain object
+            tradeRecords: tradeRecordsMap.get(purchase.id) || []
+        }));
+        return res.status(200).json(purchasesWithTradeRecords);
     } catch (error) {
-        console.error('Error in listing all purchases:', error);
+        console.error('Error in listing purchases with trade records:', error);
         return res.status(500).json({ error: error.message });
     }
 };
@@ -48,10 +36,59 @@ const getPurchase = async (req, res) => {
         if (!purchase) {
             return res.status(404).json({ error: 'Purchase not found.' });
         }
-        res.status(200).json(purchase);
+        console.log(typeof purchase);
+        const purchaseJSON = purchase.toJSON();
+        purchaseJSON["trade_records"] = await TradeRecord.findAll({
+            where: {
+                purchase: purchase.id
+            }
+        });
+        res.status(200).json(purchaseJSON);
     } catch (error) {
         console.error('Error retrieving purchase:', error);
         return res.status(500).json({ error: error.message });
+    }
+};
+
+const addPurchase = async (req, res) => {
+    try {
+        const { supplier, trade_records } = req.body;
+        const timestamp = new Date();
+        const trade_status = "PENDING";
+        const t = await sequelize.transaction();
+
+        try {
+            // Create the Purchase record
+            const newPurchase = await Purchase.create({
+                timestamp,
+                trade_status,
+                supplier
+            }, { transaction: t });
+
+            // Create TradeRecord records for each trade_records entry
+            for (const { quantity, price, product, warehouse } of trade_records) {
+                await TradeRecord.create({
+                    quantity,
+                    price,
+                    warehouse,
+                    product,
+                    purchase: newPurchase.id
+                }, { transaction: t });
+            }
+
+            // Commit the transaction
+            await t.commit();
+
+            return res.status(201).json(newPurchase);
+        } catch (error) {
+            // Rollback the transaction if an error occurs
+            await t.rollback();
+            console.error('Error in adding purchase:', error);
+            return res.status(500).json({ error: 'Failed to add purchase.' });
+        }
+    } catch (error) {
+        console.error('Error in adding purchase:', error);
+        return res.status(500).json({ error: 'Failed to add purchase.' });
     }
 };
 
