@@ -13,21 +13,21 @@ describe('Sale Routes', () => {
     // Test server is healthy
     it('server must be healthy', async () => {
         const response = await request(baseUrl).get('/health');
-        // Expected response mush be 200 (healthy)
+        // Expected response must be 200 (healthy)
         expect(response.status).toBe(200);
     });
 
     // Test listing sales
     it('should list all sales', async () => {
         const response = await request(baseUrl).get('/sales');
-        // Expected response mush be 200 (successfully listed)
+        // Expected response must be 200 (successfully listed)
         expect(response.status).toBe(200);
     });
 
     // Test getting a sale
     it('should get the sale with id=1', async () => {
         const response = await request(baseUrl).get('/sales/1');
-        // Expected response mush be 200 (successfully get)
+        // Expected response must be 200 (successfully get)
         expect(response.status).toBe(200);
         // Expected product name must match
         expect(response.body.id).toBe(1);
