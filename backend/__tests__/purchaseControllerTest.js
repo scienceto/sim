@@ -1,5 +1,5 @@
 // Import controller methods to be tested
-const { listPurchases, getPurchase, addPurchase } = require('../../controller/purchaseController');
+const { listPurchases, getPurchase, addPurchase } = require('../controller/purchaseController');
 
 // Mock sequelize dependencies (OpTypes)
 jest.mock('sequelize', () => ({
@@ -12,7 +12,7 @@ jest.mock('sequelize', () => ({
 const { Op } = require('sequelize');
 
 // Mock models being used/called by the controller methods
-jest.mock('../../models/models', () => ({
+jest.mock('../models/models', () => ({
     sequelize: {
         transaction: jest.fn(),
     },
@@ -27,7 +27,7 @@ jest.mock('../../models/models', () => ({
     }
 }));
 // Import models used by the controller methods, after mocking the models
-const { Purchase, TradeRecord } = require('../../models/models');
+const { Purchase, TradeRecord } = require('../models/models');
 
 // Test addPurchase method of the controller (2 unittests)
 describe('addPurchase', () => {
@@ -69,18 +69,18 @@ describe('addPurchase', () => {
             commit: jest.fn(),
             rollback: jest.fn(),
         };
-        const sequelizeMock = require('../../models/models').sequelize;
+        const sequelizeMock = require('../models/models').sequelize;
         sequelizeMock.transaction.mockResolvedValue(mockTransaction);
 
         // Mock a new purchase
         // and resolve Purchase.create mock method to the new mock purchase
         const mockNewPurchase = { id: 1, timestamp: new Date(), trade_status: 'PENDING', supplier: 'Supplier' };
-        const purchaseCreateMock = require('../../models/models').Purchase.create;
+        const purchaseCreateMock = require('../models/models').Purchase.create;
         purchaseCreateMock.mockResolvedValue(mockNewPurchase);
 
         // Mock trade records corresponding to the new purchase
         // and resolve TradeRecord.create mock method to the new mock trade records
-        const tradeRecordCreateMock = require('../../models/models').TradeRecord.create;
+        const tradeRecordCreateMock = require('../models/models').TradeRecord.create;
         tradeRecordCreateMock.mockResolvedValue();
 
         // Call the actual method
@@ -157,11 +157,11 @@ describe('addPurchase', () => {
             commit: jest.fn(),
             rollback: jest.fn(),
         };
-        const sequelizeMock = require('../../models/models').sequelize;
+        const sequelizeMock = require('../models/models').sequelize;
         sequelizeMock.transaction.mockResolvedValue(mockTransaction);
 
         // Mock creation of Purchase to simulate an error
-        const purchaseCreateMock = require('../../models/models').Purchase.create;
+        const purchaseCreateMock = require('../models/models').Purchase.create;
         purchaseCreateMock.mockRejectedValue(new Error('Failed to create purchase'));
 
         // Call the actual method
