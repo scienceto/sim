@@ -12,7 +12,7 @@
 
 ## Run Test Script
 
-0. Before you run the test cases, you need to setup postgres database and put the appropriate values in `.env` file. Then run `export $(grep -v '^#' .env | xargs)` if running on linux or `(for /F \"tokens=*\" %i in (.env) do set %i)` if running on windows, in the same shell/command prompt.
+0. Before you run the test cases, you need to setup postgres database and put the appropriate values in `.env` file. Then run `export $(grep -v '^#' .env | xargs)` if running on linux or `Get-Content .env | ForEach-Object { $name,$value = $_ -split '='; Set-Item -Path "ENV:\$name" -Value $value }` if running on windows, in the same shell/command prompt.
 
 1. Run test script defined in `package.json` using the following command.
     ```bash
