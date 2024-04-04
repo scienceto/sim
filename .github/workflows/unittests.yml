@@ -40,7 +40,7 @@ jobs:
       # Step to install project dependencies
       - name: Install dependencies
         working-directory: ./backend
-        run: npm install
+        run: npm install && npm install --dev
 
       # Step to connect to PostgreSQL and run tests
       - name: Run unittests
