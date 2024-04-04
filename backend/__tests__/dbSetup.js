@@ -7,7 +7,7 @@ db.sequelize.drop().then(() => {
             // Seed data for UserRole
             await db.UserRole.bulkCreate([
                 { id: 'ADMIN', disabled: false },
-                { id: 'EDITOR', disabled: false },
+                { id: 'OPERATOR', disabled: false },
                 { id: 'VIEWER', disabled: false },
             ]);
 
@@ -24,8 +24,8 @@ db.sequelize.drop().then(() => {
             ]);
             // Seed data for AppUser
             await db.AppUser.bulkCreate([
-                { id: 'john.doe@example.com', name: 'John Doe', disabled: false, role: "ADMIN" },
-                { id: 'john.smith@example.com', name: 'Jane Smith', disabled: false, role: "EDITOR" }
+                { id: 'john.doe@example.com', name: 'John Doe', disabled: false, role: "ADMIN", receive_notification: false },
+                { id: 'jp9959@g.rit.edu', name: 'Jheel Patel', disabled: false, role: "VIEWER" }
             ]);
 
             // Seed data for Supplier
@@ -43,7 +43,8 @@ db.sequelize.drop().then(() => {
             // Seed data for Product
             await db.Product.bulkCreate([
                 { name: 'Product 1', disabled: false, description: 'Description 1', category: "DEFAULT" },
-                { name: 'Product 2', disabled: false, description: 'Description 2', category: "DEFAULT" }
+                { name: 'Product 2', disabled: false, description: 'Description 2', category: "DEFAULT" },
+                { name: 'Product 3', disabled: false, description: 'Description 3', category: "DEFAULT" }
             ]);
 
             // Seed data for Warehouse
@@ -77,7 +78,9 @@ db.sequelize.drop().then(() => {
                 { quantity: 100, product: 1, warehouse: 1 },
                 { quantity: 200, product: 1, warehouse: 2 },
                 { quantity: 100, product: 2, warehouse: 1 },
-                { quantity: 200, product: 2, warehouse: 2 }
+                { quantity: 200, product: 2, warehouse: 2 },
+                { quantity: 5, product: 3, warehouse: 1 },
+                { quantity: 50, product: 3, warehouse: 2 }
             ]);
 
             console.log('Seed data inserted successfully.');

@@ -41,6 +41,11 @@ const AppUser = sequelize.define('AppUser', {
     metadata: {
         type: DataTypes.TEXT
     },
+    receive_notification: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
 }, {
     tableName: "app_user",
     timestamps: false
@@ -192,15 +197,17 @@ const ProductInventory = sequelize.define('ProductInventory', {
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+            min: 0,
+        },
     },
-    // Define composite primary key consisting of foreign keys
     product: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
-            model: 'product', // Name of the referenced model
-            key: 'id', // Name of the referenced key
+            model: 'product',
+            key: 'id',
         },
         onDelete: 'CASCADE',
     },
@@ -209,8 +216,8 @@ const ProductInventory = sequelize.define('ProductInventory', {
         allowNull: false,
         primaryKey: true,
         references: {
-            model: 'warehouse', // Name of the referenced model
-            key: 'id', // Name of the referenced key
+            model: 'warehouse',
+            key: 'id',
         },
         onDelete: 'CASCADE',
     },
@@ -230,10 +237,16 @@ const TradeRecord = sequelize.define('TradeRecord', {
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+            min: 0,
+        },
     },
     price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+        validate: {
+            min: 0,
+        },
     },
 }, {
     tableName: "trade_record",
