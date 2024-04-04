@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712273958020" clover="3.2.0">
-  <project timestamp="1712273958020" name="All files">
+<coverage generated="1712274989113" clover="3.2.0">
+  <project timestamp="1712274989113" name="All files">
     <metrics statements="70" coveredstatements="45" conditionals="10" coveredconditionals="4" methods="6" coveredmethods="5" elements="86" coveredelements="54" complexity="0" loc="70" ncloc="70" packages="1" files="1" classes="1"/>
     <file name="purchaseController.js" path="/home/jheel/Desktop/sim/backend/controller/purchaseController.js">
       <metrics statements="70" coveredstatements="45" conditionals="10" coveredconditionals="4" methods="6" coveredmethods="5"/>

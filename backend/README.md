@@ -1,3 +1,6 @@
+# LogiMasters Backend
+[![codecov](https://codecov.io/gh/scienceto/sim/graph/badge.svg?token=YE4WMMYJ4O)](https://codecov.io/gh/scienceto/sim)
+
 ## Runtime Setup
 
 1. NPM Version: 10.5.0
@@ -12,13 +15,14 @@
 
 ## Run Test Script
 
-0. Before you run the test cases, you need to setup postgres database and put the appropriate values in `.env` file. Then run `export $(grep -v '^#' .env | xargs)` if running on linux or `Get-Content .env | ForEach-Object { $name,$value = $_ -split '='; Set-Item -Path "ENV:\$name" -Value $value }` if running on windows, in the same shell/command prompt.
-
-1. Run test script defined in `package.json` using the following command.
+1. Install `npm` dependencies and run test script defined in `package.json` using the following command.
     ```bash
+   # install dependencies
+   npm install
+   
+   # run tests
    npm test
     ```
-   Make sure PostgreSQL server is running and accessible from the runtime. You need to set correct env variable values in the provided `.env` file. 
 
 ## MVPs Implemented
 
