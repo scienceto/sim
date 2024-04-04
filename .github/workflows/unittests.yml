@@ -45,7 +45,7 @@ jobs:
       # Step to connect to PostgreSQL and run tests
       - name: Run unittests
         working-directory: ./backend
-        run: jest --coverage
+        run: npm test
         env:
           DB_HOST: localhost
           DB_USERNAME: postgres
