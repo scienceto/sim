@@ -4,14 +4,14 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-AWS.config.update({
-    region: process.env.AWS_REGION
-});
-
-const ses = new AWS.SES();
-
 const notifyLowInventory = async () => {
     try {
+        AWS.config.update({
+            region: process.env.AWS_REGION
+        });
+
+        const ses = new AWS.SES();
+
         const thresholdQuantity = 10;
 
         const lowInventoryProducts = await ProductInventory.findAll({
