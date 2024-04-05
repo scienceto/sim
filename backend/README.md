@@ -1,4 +1,6 @@
 # LogiMasters Backend
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 [![codecov](https://codecov.io/gh/scienceto/sim/graph/badge.svg?token=YE4WMMYJ4O)](https://codecov.io/gh/scienceto/sim)
 
 ## Runtime Setup
@@ -38,14 +40,14 @@
 
 2. Create/manage stocking orders and update the inventory once the order has been fulfilled.
 
-   | Functionality                                                              | Component                          | Model/s               | Owner | Unittest |
-   |----------------------------------------------------------------------------|------------------------------------|-----------------------|-------|----------|
-   | List all purchase records along with its trade records                     | purchaseController.listPurchases() | Purchase, TradeRecord |       |          |
-   | Get a purchase record by its id along with the corresponding trade records | purchaseController.getPurchase()   | Purchase, TradeRecord |       |          |
-   | Add a purchase record (also creates the corresponding trade records)       | purchaseController.addPurchase()   | Purchase, TradeRecord |       |          |
-   | List all sale records along with its trade records                         | saleController.listSales()         | Sale, TradeRecord     |       |          |
-   | Get a sale record by its id along with the corresponding trade records     | saleController.getSale()           | Sale, TradeRecord     |       |          |
-   | Add a sale record (also creates the corresponding trade records)           | saleController.addSale()           | Sale, TradeRecord     |       |          |
+   | Functionality                                                              | Component                          | Model/s               | Owner | Unittest File                                                    |
+   |----------------------------------------------------------------------------|------------------------------------|-----------------------|-------|------------------------------------------------------------------|
+   | List all purchase records along with its trade records                     | purchaseController.listPurchases() | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | Get a purchase record by its id along with the corresponding trade records | purchaseController.getPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | Add a purchase record (also creates the corresponding trade records)       | purchaseController.addPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | List all sale records along with its trade records                         | saleController.listSales()         | Sale, TradeRecord     |       |                                                                  |
+   | Get a sale record by its id along with the corresponding trade records     | saleController.getSale()           | Sale, TradeRecord     |       |                                                                  |
+   | Add a sale record (also creates the corresponding trade records)           | saleController.addSale()           | Sale, TradeRecord     |       |                                                                  |
 
 3. Update the quantity of a product in a warehouse once it leaves/added to the warehouse.
    
@@ -66,16 +68,6 @@
 
 5. SSO-based login using customer email domain.
 
-## Test Cases Defined
-
-- Currently, test cases for the following MVPs have been implemented:
-  - Add a new product, update/delete existing products.
-  - Create/manage stocking orders.
-- All the current and future test cases are present in `__test__` directory.
-- `jest` framework is used for implementing unit tests.
-
-Following image shows the expected test case output for the product API.
-![](../docs/assets/Product_API_Test.png)
 
 ## GitHub Actions for Test Case
 
