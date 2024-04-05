@@ -68,6 +68,13 @@
 
 5. SSO-based login using customer email domain.
 
+   Enable seamless Single Sign-On (SSO) login using your customer's email domain for a streamlined access experience.
+
+   | Functionality                                                                                                                                                                                             | Component (URL)                                  | Model/s | Owner | Unittest |
+   |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|---------|-------|----------|
+   | Successfully set up a login page for the user to sign up and log in using provided credentials using AWS Cognito with Google as a federated identity provider. | https://inventorymgmt.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=3gnql5j3sbni0heiavr3suh3hc&redirect_uri=https://www.ims.com/oauth2/idpresponse |         |       |          |
+
+   
 
 ## GitHub Actions for Test Case
 
