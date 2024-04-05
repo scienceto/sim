@@ -24,36 +24,28 @@ const getProduct = async (req, res) => {
   }
 };
 
-const addProduct = async (req, res) => {
+async function addProduct(req, res) {
+    const { name, category, description, sale_price } = req.body;
+  
     try {
-        const {name, category, description, sale_price} = req.body;
-        const t = await sequelize.transaction();
-        try {
-            const newProduct = await Product.create({
-                name,
-                category,
-                description,
-                sale_price
-            });
-            const warehouses = await Warehouse.findAll();
-            const promise = warehouses.map((warehouse) => {
-                ProductInventory.create({
-                    product: newProduct.id,
-                    quantity: 0,
-                    warehouse: warehouse.id
-                });
-            })
-            await t.commit();
-            return res.status(201).json(newProduct);
-        } catch (error) {
-            await t.rollback();
-            throw error;
-        }
+      await sequelize.transaction(async (t) => {
+        const product = await Product.create(
+          { name, category, description, sale_price },
+          { transaction: t }
+        );
+
+        await ProductInventory.create(
+          { product: product.id, quantity: 0 }, 
+          { transaction: t }
+        );
+  
+        res.status(201).json(product);
+      });
     } catch (error) {
-        console.error('Error in adding product:', error);
-        return res.status(500).json({error: error.message});
+      console.error('Error in adding product:', error);
+      res.status(500).json({ error: 'Failed to add product' });
     }
-};
+  }
 
 const updateProduct = async (req, res) => {
     try {
@@ -78,21 +70,21 @@ const updateProduct = async (req, res) => {
     }
 };
 
-const deleteProduct = async (req, res) => {
+async function deleteProduct(req, res) {
+    const productId = req.params.id;
+  
     try {
-        const {id} = req.params;
-        const product = await Product.findByPk(id);
-        if (!product) {
-            return res.status(404).json({error: 'Product not found'});
-        }
-        product.disabled = true;
-        await product.save();
-        return res.status(204).end();
+      const product = await Product.findByPk(productId);
+      if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+      await product.destroy();
+      return res.status(204).send();
     } catch (error) {
-        console.error('Error deleting product:', error);
-        return res.status(500).json({error: error.message});
+      console.error('Error in deleting product:', error);
+      return res.status(500).json({ error: 'Failed to delete product' });
     }
-};
+  }
 
 module.exports = {
     addProduct,
