@@ -1,5 +1,5 @@
 // Import controller methods to be tested
-const { listPurchases, getPurchase, addPurchase } = require('../controller/purchaseController');
+const { listPurchases, getPurchase, addPurchase, fulfillPurchase } = require('../controller/purchaseController');
 
 // Mock sequelize dependencies (OpTypes)
 jest.mock('sequelize', () => ({
@@ -24,10 +24,14 @@ jest.mock('../models/models', () => ({
     TradeRecord: {
         findAll: jest.fn(),
         create: jest.fn(),
+        findByPk: jest.fn()
+    },
+    ProductInventory: {
+        findOne: jest.fn()
     }
 }));
 // Import models used by the controller methods, after mocking the models
-const { Purchase, TradeRecord } = require('../models/models');
+const { Purchase, TradeRecord, ProductInventory } = require('../models/models');
 
 // Test addPurchase method of the controller (2 unittests)
 describe('addPurchase', () => {
@@ -88,7 +92,7 @@ describe('addPurchase', () => {
 
         // Assert method calls and resolved objects
         // expect mock transaction to be called once
-        expect(sequelizeMock.transaction).toHaveBeenCalled();
+        expect(sequelizeMock.transaction).toHaveBeenCalledTimes(1);
         // check Purchase.create is called once with the correct argument
         expect(purchaseCreateMock).toHaveBeenCalledWith(
             {
@@ -121,7 +125,7 @@ describe('addPurchase', () => {
             { transaction: mockTransaction }
         );
         // Check if commit is called on the mock transaction
-        expect(mockTransaction.commit).toHaveBeenCalled();
+        expect(mockTransaction.commit).toHaveBeenCalledTimes(1);
         // check if the expected status and response is returned
         expect(res.status).toHaveBeenCalledWith(201);
         expect(res.json).toHaveBeenCalledWith(mockNewPurchase);
@@ -371,3 +375,148 @@ describe('getPurchase', () => {
     });
 });
 
+describe('fulfillPurchase', () => {
+    it('should fulfill a purchase successfully', async () => {
+        // Mock request parameters
+        const req = { params: { id: 1 } };
+        // Mock response object
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        // Mock transaction
+        const mockTransaction = {
+            commit: jest.fn(),
+            rollback: jest.fn(),
+        };
+        const sequelizeMock = require('../models/models').sequelize;
+        sequelizeMock.transaction.mockResolvedValue(mockTransaction);
+
+        // Mock Purchase.findByPk to return a purchase
+        const mockPurchase = {
+            id: 1,
+            trade_record: 1,
+            save: jest.fn().mockResolvedValue(true) // Mock the save method
+        };
+        Purchase.findByPk.mockResolvedValue(mockPurchase);
+        // Mock TradeRecord.findByPk to return a trade record
+        const mockTradeRecord = {
+            product: 1,
+            warehouse: 1,
+            quantity: 10,
+            save: jest.fn().mockResolvedValue(true) // Mock the save method
+        };
+        TradeRecord.findByPk.mockResolvedValue(mockTradeRecord);
+        // Mock ProductInventory.findOne to return a product inventory
+        const mockProductInventory = {
+            quantity: 5,
+            save: jest.fn().mockResolvedValue(true) // Mock the save method
+        };
+        ProductInventory.findOne.mockResolvedValue(mockProductInventory);
+        
+        // Call the fulfillPurchase method
+        await fulfillPurchase(req, res);
+        
+        // Assert that sequelize.transaction was called 3 times (in addPurchase test too it was called hence 3)
+        expect(sequelizeMock.transaction).toHaveBeenCalledTimes(3);
+        // Assert that Purchase.findByPk was called once with the correct id
+        expect(Purchase.findByPk).toHaveBeenCalledWith(req.params.id);
+        // Assert that TradeRecord.findByPk was called once with the correct trade record id
+        expect(TradeRecord.findByPk).toHaveBeenCalledWith(mockPurchase.trade_record);
+        // Assert that ProductInventory.findOne was called once with the correct parameters
+        expect(ProductInventory.findOne).toHaveBeenCalledWith({
+            where: {
+                product: mockTradeRecord.product,
+                warehouse: mockTradeRecord.warehouse,
+            }
+        });
+        // Assert that mockPurchase.trade_status was updated to "COMPLETED"
+        expect(mockPurchase.trade_status).toBe("COMPLETED");
+        // Assert that mockProductInventory.quantity was updated correctly
+        expect(mockProductInventory.quantity).toBe(mockTradeRecord.quantity + 5); // 5 is the initial quantity
+        // Assert that transaction.commit was called once
+        expect(mockTransaction.commit).toHaveBeenCalledTimes(1);
+        // Assert that the response status is 201 (Created)
+        expect(res.status).toHaveBeenCalledWith(201);
+        // Assert that the response JSON is the updated purchase object
+        expect(res.json).toHaveBeenCalledWith(mockPurchase);
+    });
+
+    it('should handle purchase not found', async () => {
+        // Mock request parameters
+        const req = { params: { id: 1 } };
+        // Mock response object
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        // Mock Purchase.findByPk to return null (purchase not found)
+        Purchase.findByPk.mockResolvedValue(null);
+        
+        // Call the fulfillPurchase method
+        await fulfillPurchase(req, res);
+        
+        // Assertions
+        // Assert that Purchase.findByPk was called once with the correct id
+        expect(Purchase.findByPk).toHaveBeenCalledWith(req.params.id);
+        // Assert that the response status is 404 (Not Found)
+        expect(res.status).toHaveBeenCalledWith(404);
+        // Assert that the response JSON contains the error message
+        expect(res.json).toHaveBeenCalledWith({ error: 'Purchase not found.' });
+    });
+
+    it('should handle product inventory not found', async () => {
+        // Mock request parameters
+        const req = { params: { id: 1 } };
+        // Mock response object
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        // Mock Purchase.findByPk to return a purchase
+        const mockPurchase = { id: 1, trade_record: 1 };
+        Purchase.findByPk.mockResolvedValue(mockPurchase);
+        // Mock TradeRecord.findByPk to return a trade record
+        const mockTradeRecord = { product: 1, warehouse: 1 };
+        TradeRecord.findByPk.mockResolvedValue(mockTradeRecord);
+        // Mock ProductInventory.findOne to return null (product inventory not found)
+        ProductInventory.findOne.mockResolvedValue(null);
+        
+        // Call the fulfillPurchase method
+        await fulfillPurchase(req, res);
+        
+        // Assertions
+        // Assert that ProductInventory.findOne was called once with the correct parameters
+        expect(ProductInventory.findOne).toHaveBeenCalledWith({
+            where: {
+                product: mockTradeRecord.product,
+                warehouse: mockTradeRecord.warehouse,
+            }
+        });
+        // Assert that the response status is 404 (Not Found)
+        expect(res.status).toHaveBeenCalledWith(404);
+        // Assert that the response JSON contains the error message
+        expect(res.json).toHaveBeenCalledWith({ error: 'Product inventory not found.' });
+    });
+
+    it('should handle errors', async () => {
+        // Mock request parameters
+        const req = { params: { id: 1 } };
+        // Mock response object
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+        // Mock Purchase.findByPk to throw an error
+        Purchase.findByPk.mockRejectedValue(new Error('Database error'));
+        
+        // Call the fulfillPurchase method
+        await fulfillPurchase(req, res);
+        
+        // Assertions
+        // Assert that the response status is 500 (Internal Server Error)
+        expect(res.status).toHaveBeenCalledWith(500);
+        // Assert that the response JSON contains the error message
+        expect(res.json).toHaveBeenCalledWith({ error: 'Database error' });
+    });
+});

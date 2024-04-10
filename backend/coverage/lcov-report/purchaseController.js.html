@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.78% </span>
+                <span class="strong">97.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/71</span>
+                <span class='fraction'>69/71</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/10</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.28% </span>
+                <span class="strong">97.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/70</span>
+                <span class='fraction'>68/70</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -296,39 +296,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -433,40 +433,40 @@ const addPurchase = async (req, res) =&gt; {
     }
 };
 &nbsp;
-const fulfillPurchase = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-        const t = <span class="cstat-no" title="statement not covered" >await sequelize.transaction();</span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const purchase = <span class="cstat-no" title="statement not covered" >await Purchase.findByPk(id);</span>
-<span class="cstat-no" title="statement not covered" >            if (!purchase) {</span>
-<span class="cstat-no" title="statement not covered" >                await t.rollback();</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(404).json({ error: 'Purchase not found.' });</span>
+const fulfillPurchase = async (req, res) =&gt; {
+    try {
+        const { id } = req.params;
+        const t = await sequelize.transaction();
+        try {
+            const purchase = await Purchase.findByPk(id);
+            if (!purchase) {
+                await t.rollback();
+                return res.status(404).json({ error: 'Purchase not found.' });
             }
-            const tradeRecord = <span class="cstat-no" title="statement not covered" >await TradeRecord.findByPk(purchase.trade_record);</span>
-            const productInventory = <span class="cstat-no" title="statement not covered" >await ProductInventory.findOne({</span>
+            const tradeRecord = await TradeRecord.findByPk(purchase.trade_record);
+            const productInventory = await ProductInventory.findOne({
                 where: {
                     product: tradeRecord.product,
                     warehouse: tradeRecord.warehouse,
                 }
             });
-<span class="cstat-no" title="statement not covered" >            if (!productInventory) {</span>
-<span class="cstat-no" title="statement not covered" >                await t.rollback();</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(404).json({ error: 'Product inventory not found.' });</span>
+            if (!productInventory) {
+                await t.rollback();
+                return res.status(404).json({ error: 'Product inventory not found.' });
             }
-<span class="cstat-no" title="statement not covered" >            productInventory.quantity += tradeRecord.quantity;</span>
-<span class="cstat-no" title="statement not covered" >            await productInventory.save();</span>
-<span class="cstat-no" title="statement not covered" >            purchase.trade_status = "COMPLETED";</span>
-<span class="cstat-no" title="statement not covered" >            await purchase.save();</span>
-<span class="cstat-no" title="statement not covered" >            await t.commit();</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(201).json(purchase);</span>
+            productInventory.quantity += tradeRecord.quantity;
+            await productInventory.save();
+            purchase.trade_status = "COMPLETED";
+            await purchase.save();
+            await t.commit();
+            return res.status(201).json(purchase);
         } catch (error) {
-<span class="cstat-no" title="statement not covered" >            await t.rollback();</span>
-<span class="cstat-no" title="statement not covered" >            throw error;</span>
+            await t.rollback();
+            throw error;
         }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error('Error fulfilling purchase:', error);</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(500).json({ error: error.message });</span>
+        console.error('Error fulfilling purchase:', error);
+        return res.status(500).json({ error: error.message });
     }
 };
 &nbsp;
@@ -484,7 +484,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-04T23:56:29.109Z
+                at 2024-04-10T23:30:38.794Z
             </div>
         <script src="prettify.js"></script>
         <script>
