@@ -42,9 +42,9 @@
 
    | Functionality                                                              | Component                          | Model/s               | Owner | Unittest File                                                    |
    |----------------------------------------------------------------------------|------------------------------------|-----------------------|-------|------------------------------------------------------------------|
-   | List all purchase records along with its trade records                     | purchaseController.listPurchases() | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
-   | Get a purchase record by its id along with the corresponding trade records | purchaseController.getPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
-   | Add a purchase record (also creates the corresponding trade records)       | purchaseController.addPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | List all purchase records along with its trade records                     | purchaseController.listPurchases() | Purchase, TradeRecord | Jheel | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | Get a purchase record by its id along with the corresponding trade records | purchaseController.getPurchase()   | Purchase, TradeRecord | Jheel | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
+   | Add a purchase record (also creates the corresponding trade records)       | purchaseController.addPurchase()   | Purchase, TradeRecord | Jheel | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
    | List all sale records along with its trade records                         | saleController.listSales()         | Sale, TradeRecord     |       |                                                                  |
    | Get a sale record by its id along with the corresponding trade records     | saleController.getSale()           | Sale, TradeRecord     |       |                                                                  |
    | Add a sale record (also creates the corresponding trade records)           | saleController.addSale()           | Sale, TradeRecord     |       |                                                                  |
