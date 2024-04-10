@@ -25,18 +25,24 @@
    # run tests
    npm test
     ```
+## Run Unit Tests
 
+1. In order to run Unit tests make sure you have done the above steps except the "Run Test Script". And run the below code in backend folder.
+   ```bash
+   #run tests
+   npx jest __tests__/testfilename.js
+   ```
 ## MVPs Implemented
 
 1. Add a new product, update/delete existing products.
 
-   | Functionality                         | Component                         | Model/s | Owner | Unittest |
-   |---------------------------------------|-----------------------------------|---------|-------|----------|
-   | List all products                     | productController.listProducts()  | Product |       |          |
-   | Get a product details by its id       | productController.getProduct()    | Product |       |          |
-   | Add a new product                     | productController.addProduct()    | Product |       |          |
-   | Update details of a product by its id | productController.updateProduct() | Product |       |          |
-   | Disable a product (not deletion)      | productController.deleteProduct() | Product |       |          |
+   | Functionality                         | Component                         | Model/s | Owner | Unittest File           |
+   |---------------------------------------|-----------------------------------|---------|-------|-------------------------|
+   | List all products                     | productController.listProducts()  | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
+   | Get a product details by its id       | productController.getProduct()    | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
+   | Add a new product                     | productController.addProduct()    | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
+   | Update details of a product by its id | productController.updateProduct() | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
+   | Disable a product (not deletion)      | productController.deleteProduct() | Product |       |                         |
 
 2. Create/manage stocking orders and update the inventory once the order has been fulfilled.
 
@@ -68,6 +74,13 @@
 
 5. SSO-based login using customer email domain.
 
+   Enable seamless Single Sign-On (SSO) login using your customer's email domain for a streamlined access experience.
+
+   | Functionality                                                                                                                                                                                             | Component (URL)                                  | Model/s | Owner | Unittest |
+   |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|---------|-------|----------|
+   | Successfully set up a login page for the user to sign up and log in using provided credentials using AWS Cognito with Google as a federated identity provider. | https://inventorymgmt.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=3gnql5j3sbni0heiavr3suh3hc&redirect_uri=https://www.ims.com/oauth2/idpresponse |         |       |          |
+
+   
 
 ## GitHub Actions for Test Case
 
