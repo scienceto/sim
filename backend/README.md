@@ -17,31 +17,22 @@
 
 ## Run Test Script
 
-1. Install `npm` dependencies and run test script defined in `package.json` using the following command.
+1. After installing the dependencies run the test script defined in `package.json` using the following command. It also generates the code coverage report.
     ```bash
-   # install dependencies
-   npm install
-   
    # run tests
    npm test
     ```
-## Run Unit Tests
 
-1. In order to run Unit tests make sure you have done the above steps except the "Run Test Script". And run the below code in backend folder.
-   ```bash
-   #run tests
-   npx jest __tests__/testfilename.js
-   ```
 ## MVPs Implemented
 
 1. Add a new product, update/delete existing products.
 
    | Functionality                         | Component                         | Model/s | Owner | Unittest File           |
    |---------------------------------------|-----------------------------------|---------|-------|-------------------------|
-   | List all products                     | productController.listProducts()  | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
-   | Get a product details by its id       | productController.getProduct()    | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
-   | Add a new product                     | productController.addProduct()    | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
-   | Update details of a product by its id | productController.updateProduct() | Product |       | [productControllerTes.js](__tests__/purchaseControllerTest.js) |
+   | List all products                     | productController.listProducts()  | Product |       | [productControllerTest.js](__tests__/productControllerTest.js) |
+   | Get a product details by its id       | productController.getProduct()    | Product |       | [productControllerTest.js](__tests__/productControllerTest.js) |
+   | Add a new product                     | productController.addProduct()    | Product |       | [productControllerTest.js](__tests__/productControllerTest.js) |
+   | Update details of a product by its id | productController.updateProduct() | Product |       | [productControllerTest.js](__tests__/productControllerTest.js) |
    | Disable a product (not deletion)      | productController.deleteProduct() | Product |       |                         |
 
 2. Create/manage stocking orders and update the inventory once the order has been fulfilled.
@@ -80,7 +71,16 @@
    |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|---------|-------|----------|
    | Successfully set up a login page for the user to sign up and log in using provided credentials using AWS Cognito with Google as a federated identity provider. | https://inventorymgmt.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=3gnql5j3sbni0heiavr3suh3hc&redirect_uri=https://www.ims.com/oauth2/idpresponse |         |       |          |
 
+6. Create/manage vendor information on inventory products.
+
+   Manages supplier information from where the purchases are made.
    
+   | Functionality                         | Component                         | Model/s | Owner | Unittest File           |
+   |---------------------------------------|-----------------------------------|---------|-------|-------------------------|
+   | List all suppliers                     | supplierController.listSuppliers()  | Supplier |       | [supplierControllerTest.js](__tests__/supplierControllerTest.js) |
+   | Get a Supplier details by its id       | supplierController.getSupplier()    | Supplier |       | [supplierControllerTest.js](__tests__/supplierControllerTest.js) |
+   | Add a new Supplier                     | supplierController.addSupplier()    | Supplier |       | [supplierControllerTest.js](__tests__/supplierControllerTest.js) |
+   | Update details of a Supplier by its id | supplierController.updateSupplier() | Supplier |       | [supplierControllerTest.js](__tests__/supplierControllerTest.js) |
 
 ## GitHub Actions for Test Case
 
