@@ -61,7 +61,7 @@
 
    | Functionality                                                                                       | Component                            | Model/s                                 | Owner | Unittest |
    |-----------------------------------------------------------------------------------------------------|--------------------------------------|-----------------------------------------|-------|----------|
-   | Fulfill a purchase (updates the corresponding product inventories using the attached trade records) | purchaseController.fulfillPurchase() | Purchase, TradeRecord, ProductInventory |       |          |
+   | Fulfill a purchase (updates the corresponding product inventories using the attached trade records) | purchaseController.fulfillPurchase() | Purchase, TradeRecord, ProductInventory |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
    | Fulfill a sale (updates the corresponding product inventories using the attached trade records)     | saleController.fulfillSale()         | Sale, TradeRecord, ProductInventory     |       |          |
 
 4. Notify by email if inventory is low for any product.
@@ -70,7 +70,7 @@
 
    | Functionality                                                                                                                                                                                             | Component                                   | Model/s | Owner | Unittest |
    |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|---------|-------|----------|
-   | Notify on email to users who have enabled notification when a product inventory is below a common threshold in any of the warehouses. CSV of low product inventory is attached in the email notification. | notificationController.notifyLowInventory() |         |       |          |
+   | Notify on email to users who have enabled notification when a product inventory is below a common threshold in any of the warehouses. CSV of low product inventory is attached in the email notification. | notificationController.notifyLowInventory() |         |       | [notificationControllerTest.js](__tests__/notificationControllerTest.js) |
 
 5. SSO-based login using customer email domain.
 
