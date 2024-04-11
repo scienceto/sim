@@ -40,14 +40,21 @@ jobs:
       # Step to install project dependencies
       - name: Install dependencies
         working-directory: ./backend
-        run: npm install
+        run: npm install && npm install --dev
 
       # Step to connect to PostgreSQL and run tests
       - name: Run unittests
         working-directory: ./backend
-        run: npm run test
+        run: npm test
         env:
           DB_HOST: localhost
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
           DB_NAME: postgres
+
+      # Upload coverage reports to Codecov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: scienceto/sim
