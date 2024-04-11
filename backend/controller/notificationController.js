@@ -86,9 +86,3 @@ const notifyLowInventory = async () => {
 module.exports = {
     notifyLowInventory
 };
-
-// notifyLowInventory().then(() => {
-//     console.log("Success");
-// }).catch((err) => {
-//     console.log(err);
-// })

@@ -377,6 +377,12 @@ describe('getPurchase', () => {
 
 describe('fulfillPurchase', () => {
     it('should fulfill a purchase successfully', async () => {
+        /**
+         * This unittest tests the fulfullPurchase method of the purchaseController for successful response.
+         * The method expects proper req and res object and uses sequelize transactions hence the unittest mocks the following dependencies:
+         * - res and req arguments
+         * - sequelize.transaction
+         */
         // Mock request parameters
         const req = { params: { id: 1 } };
         // Mock response object
@@ -390,8 +396,10 @@ describe('fulfillPurchase', () => {
             rollback: jest.fn(),
         };
         const sequelizeMock = require('../models/models').sequelize;
+        // Reset mock transaction call count
+        sequelizeMock.transaction.mockReset();
         sequelizeMock.transaction.mockResolvedValue(mockTransaction);
-
+        
         // Mock Purchase.findByPk to return a purchase
         const mockPurchase = {
             id: 1,
@@ -418,7 +426,7 @@ describe('fulfillPurchase', () => {
         await fulfillPurchase(req, res);
         
         // Assert that sequelize.transaction was called 3 times (in addPurchase test too it was called hence 3)
-        expect(sequelizeMock.transaction).toHaveBeenCalledTimes(3);
+        expect(sequelizeMock.transaction).toHaveBeenCalledTimes(1);
         // Assert that Purchase.findByPk was called once with the correct id
         expect(Purchase.findByPk).toHaveBeenCalledWith(req.params.id);
         // Assert that TradeRecord.findByPk was called once with the correct trade record id
