@@ -15,6 +15,7 @@ app.use(express.json());
 app.use('/products', productRoutes);
 app.use('/purchases', purchaseRoutes);
 app.use('/sales', saleRoutes);
+app.use('/suppliers', saleRoutes);
 // Server health status
 app.use('/health', async (req, res) => {
     return res.status(200).send("OK");
