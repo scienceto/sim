@@ -87,8 +87,8 @@ const addSale = async (req, res) => {
             return res.status(500).json({ error: 'Failed to add sale.' });
         }
     } catch (error) {
-        console.error('Error in adding purchase:', error);
-        return res.status(500).json({ error: 'Failed to add purchase.' });
+        console.error('Error in adding sale:', error);
+        return res.status(500).json({ error: 'Failed to add sale.' });
     }
 };
 

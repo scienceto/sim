@@ -248,7 +248,7 @@ describe('listSales', () => {
     it('should handle errors', async () => {
         // Mock the error
         const errorMessage = 'Database error';
-        Purchase.findAll.mockRejectedValue(new Error(errorMessage));
+        Sale.findAll.mockRejectedValue(new Error(errorMessage));
 
         // Mock the request and response objects
         const req = {};
@@ -355,7 +355,7 @@ describe('getSale', () => {
     it('should handle errors', async () => {
         // Mock the error
         const errorMessage = 'Database error';
-        Purchase.findByPk.mockRejectedValue(new Error(errorMessage));
+        Sale.findByPk.mockRejectedValue(new Error(errorMessage));
 
         // Mock the request and response objects
         const req = { params: { id: 1 } };
