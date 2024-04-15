@@ -1,7 +1,13 @@
 # LogiMasters Backend
+
+## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Code Coverage
 [![codecov](https://codecov.io/gh/scienceto/sim/graph/badge.svg?token=YE4WMMYJ4O)](https://codecov.io/gh/scienceto/sim)
+
+## Quality Gate
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=scienceto_sim&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=scienceto_sim)
 
 ## Runtime Setup
 
