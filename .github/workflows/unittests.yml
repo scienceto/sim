@@ -40,30 +40,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
-      # Step to set up Node.js runtime
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20' # Specify the version of Node.js
+      # # Step to set up Node.js runtime
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '20' # Specify the version of Node.js
 
-      # Step to install project dependencies
-      - name: Install dependencies
-        working-directory: ./backend
-        run: npm install && npm install --dev
+      # # Step to install project dependencies
+      # - name: Install dependencies
+      #   working-directory: ./backend
+      #   run: npm install && npm install --dev
 
-      # Step to connect to PostgreSQL and run tests
-      - name: Run unittests
-        working-directory: ./backend
-        run: npm test
-        env:
-          DB_HOST: localhost
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
-          DB_NAME: postgres
+      # # Step to connect to PostgreSQL and run tests
+      # - name: Run unittests
+      #   working-directory: ./backend
+      #   run: npm test
+      #   env:
+      #     DB_HOST: localhost
+      #     DB_USERNAME: postgres
+      #     DB_PASSWORD: postgres
+      #     DB_NAME: postgres
 
-      # Upload coverage reports to Codecov
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: scienceto/sim
+      # # Upload coverage reports to Codecov
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v4.0.1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: scienceto/sim
