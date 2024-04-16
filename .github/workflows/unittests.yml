@@ -30,6 +30,8 @@ jobs:
       # Step to check out the code repository
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
         
       # Step to set up Node.js runtime
       - name: Setup Node.js
@@ -58,3 +60,10 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: scienceto/sim
+
+      # Run sonar scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,7 +1,13 @@
 # LogiMasters Backend
+
+## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Code Coverage
 [![codecov](https://codecov.io/gh/scienceto/sim/graph/badge.svg?token=YE4WMMYJ4O)](https://codecov.io/gh/scienceto/sim)
+
+## Quality Gate
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=scienceto_sim&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=scienceto_sim)
 
 ## Runtime Setup
 
@@ -42,9 +48,9 @@
    | List all purchase records along with its trade records                     | purchaseController.listPurchases() | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
    | Get a purchase record by its id along with the corresponding trade records | purchaseController.getPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
    | Add a purchase record (also creates the corresponding trade records)       | purchaseController.addPurchase()   | Purchase, TradeRecord |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
-   | List all sale records along with its trade records                         | saleController.listSales()         | Sale, TradeRecord     |       |                                                                  |
-   | Get a sale record by its id along with the corresponding trade records     | saleController.getSale()           | Sale, TradeRecord     |       |                                                                  |
-   | Add a sale record (also creates the corresponding trade records)           | saleController.addSale()           | Sale, TradeRecord     |       |                                                                  |
+   | List all sale records along with its trade records                         | saleController.listSales()         | Sale, TradeRecord     |       |[saleControllerTest.js](__tests__/saleControllerTest.js) |
+   | Get a sale record by its id along with the corresponding trade records     | saleController.getSale()           | Sale, TradeRecord     |       |[saleControllerTest.js](__tests__/saleControllerTest.js) |
+   | Add a sale record (also creates the corresponding trade records)           | saleController.addSale()           | Sale, TradeRecord     |       |[saleControllerTest.js](__tests__/saleControllerTest.js) |
 
 3. Update the quantity of a product in a warehouse once it leaves/added to the warehouse.
    
@@ -53,7 +59,7 @@
    | Functionality                                                                                       | Component                            | Model/s                                 | Owner | Unittest |
    |-----------------------------------------------------------------------------------------------------|--------------------------------------|-----------------------------------------|-------|----------|
    | Fulfill a purchase (updates the corresponding product inventories using the attached trade records) | purchaseController.fulfillPurchase() | Purchase, TradeRecord, ProductInventory |       | [purchaseControllerTest.js](__tests__/purchaseControllerTest.js) |
-   | Fulfill a sale (updates the corresponding product inventories using the attached trade records)     | saleController.fulfillSale()         | Sale, TradeRecord, ProductInventory     |       |          |
+   | Fulfill a sale (updates the corresponding product inventories using the attached trade records)     | saleController.fulfillSale()         | Sale, TradeRecord, ProductInventory     |       | [saleControllerTest.js](__tests__/saleControllerTest.js) |
 
 4. Notify by email if inventory is low for any product.
 
