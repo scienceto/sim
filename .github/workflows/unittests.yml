@@ -1,7 +1,10 @@
 name: Test Case Workflow
 
 # Define when this workflow should run
-on: push
+on:
+  push:
+    tags:
+      - 'feat-*'
 
 # Define the jobs to be executed in this workflow
 jobs:
