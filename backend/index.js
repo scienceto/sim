@@ -11,6 +11,12 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+const corsOptions = {
+origin: 'http://localhost:3000',
+methods: '*',
+allowedHeaders: '*',
+};
 app.use(cors());
 
 // Routes for handling product inventory

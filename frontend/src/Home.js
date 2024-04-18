@@ -1,22 +1,11 @@
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Inventory from './components/console/Inventory';
-import Product from './components/console/Product';
-import Supplier from './components/console/Supplier';
-import Warehouse from './components/console/Warehouse';
-import Purchase from './components/console/Purchase';
-import Sale from './components/console/Sale';
 import LandingImage from './assets/landing-image.png';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import Console from './components/Console';
 
 const Home = () => {
   const navigate= useNavigate();
 
-  const navigateToContentPage = () => {
-    navigate('/console');
-  };
   return (
     <>
       <div className='main-section-container'>

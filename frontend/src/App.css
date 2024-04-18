@@ -9,9 +9,8 @@
 }
 
 .tabs-container {
-  width: 90%; /* 90% of the parent container width */
+  width: 100%; /* 90% of the parent container width */
   height: 90%;
-  padding: 20px;
 }
 
 .content {
