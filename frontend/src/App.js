@@ -24,7 +24,7 @@ Amplify.configure(awsExports);
 function App() {
   return (
     <div className="App">
-      <Authenticator>
+      <Authenticator socialProviders={['amazon', 'apple', 'facebook', 'google']}>
         {({ signOut }) => (
           <main>
             <header className='App-header'>
