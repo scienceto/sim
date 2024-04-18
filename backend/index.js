@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
+var cors = require('cors');
 const db = require("./models/models");
 
 const productRoutes = require('./routes/productRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes');
 const saleRoutes = require('./routes/saleRoutes');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(cors());
 
 // Routes for handling product inventory
 app.use('/products', productRoutes);
