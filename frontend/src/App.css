@@ -1,9 +1,13 @@
 .main-section-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 50px auto;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  height: 90vh; /* 90% of the viewport height */
+}
+
+.tabs-container {
+  width: 90%; /* 90% of the parent container width */
+  height: 90%;
   padding: 20px;
 }
 
@@ -32,4 +36,84 @@
 .image {
   max-width: 100%;
   height: auto;
+}
+
+/* Header styles */
+.header {
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  padding: 20px; /* Padding around content */
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Space between logo and nav */
+  align-items: center; /* Align items vertically */
+}
+
+.logo {
+  margin: 0; /* Remove default margin */
+}
+
+/* Header styles */
+.header {
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Padding around content */
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Space between logo, nav, and sign-out button */
+  align-items: center; /* Align items vertically */
+}
+
+.logo {
+  margin: 0; /* Remove default margin */
+}
+
+/* Navigation styles */
+.header nav ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.header nav ul li {
+  display: inline; /* Display list items horizontally */
+  margin-left: 10px; /* Reduced spacing between list items */
+}
+
+.header nav ul li:first-child {
+  margin-left: 0; /* Remove margin for first item */
+}
+
+.header nav ul li a {
+  color: #fff; /* Text color for links */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Reduced font size */
+}
+
+.header nav ul li a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.sign-out-btn {
+  color: #fff; /* Text color */
+  background-color: #007bff; /* Background color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px 16px; /* Padding */
+  cursor: pointer; /* Cursor style */
+  font-size: 14px; /* Font size */
+}
+
+.sign-out-btn:hover {
+  background-color: #0056b3; /* Darker background color on hover */
+}
+
+
+/* Footer styles */
+.footer {
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Padding around content */
+  text-align: center; /* Center align text */
+  position: fixed; /* Position fixed */
+  bottom: 0; /* Align to the bottom of the viewport */
+  width: 100%; /* Full width */
 }
