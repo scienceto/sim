@@ -6,7 +6,8 @@ const Header = ({ handleSignOut }) => {
             <h1 className="logo">LogiMasters</h1>
             <nav>
                 <ul>
-                    <li><Link to="/">Console</Link></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/console">Console</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
                 </ul>
