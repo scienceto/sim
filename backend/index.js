@@ -17,7 +17,7 @@ origin: 'http://localhost:3000',
 methods: '*',
 allowedHeaders: '*',
 };
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Routes for handling product inventory
 app.use('/products', productRoutes);
