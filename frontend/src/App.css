@@ -59,22 +59,24 @@
 
 /* Header styles */
 .header {
-  background-color: #333; /* Background color */
-  color: #fff; /* Text color */
-  padding: 20px; /* Padding around content */
+  background-color: wheat; /* Background color */
+  color: #333; /* Text color */
+  padding: 20px 40px; /* Padding around content */
   display: flex; /* Use flexbox */
   justify-content: space-between; /* Space between logo and nav */
-  align-items: center; /* Align items vertically */
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Align items vertically */
 }
 
 .logo {
+  color: #333;
   margin: 0; /* Remove default margin */
 }
 
 /* Header styles */
 .header {
-  background-color: #333; /* Background color */
-  color: #fff; /* Text color */
+  background-color: white; /* Background color */
+  color: #333; /* Text color */
   padding: 10px 20px; /* Padding around content */
   display: flex; /* Use flexbox */
   justify-content: space-between; /* Space between logo, nav, and sign-out button */
@@ -82,6 +84,7 @@
 }
 
 .logo {
+  color: #333;
   margin: 0; /* Remove default margin */
 }
 
@@ -102,13 +105,15 @@
 }
 
 .header nav ul li a {
-  color: #fff; /* Text color for links */
+  color: #333; /* Text color for links */
   text-decoration: none; /* Remove underline */
   font-size: 16px; /* Reduced font size */
+  padding: 8px 16px;
+  border-radius: 20px;
 }
 
 .header nav ul li a:hover {
-  text-decoration: underline; /* Add underline on hover */
+  text-decoration: none; /* Add underline on hover */
 }
 
 .sign-out-btn {
@@ -116,9 +121,9 @@
   background-color: #007bff; /* Background color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
-  padding: 8px 16px; /* Padding */
+  padding: 15px 30px; /* Padding */
   cursor: pointer; /* Cursor style */
-  font-size: 14px; /* Font size */
+  font-size: 1em; /* Font size */
 }
 
 .sign-out-btn:hover {
