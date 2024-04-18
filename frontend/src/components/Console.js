@@ -9,45 +9,43 @@ import Sale from './console/Sale';
 import '../App.css';
 
 const Console = () => {
-    return (
-        <>
+  return (
+    <>
+      <div className='main-section-container'>
         <div className="tabs-container">
-        <Tabs>
-          <TabList>
-            <Tab>Products</Tab>
-            <Tab>Inventory</Tab>
-            <Tab>Warehouses</Tab>
-            <Tab>Suppliers</Tab>
-            <Tab>Purchases</Tab>
-            <Tab>Sales</Tab>
-          </TabList>
+          <Tabs>
+            <TabList>
+              <Tab>Products</Tab>
+              <Tab>Inventory</Tab>
+              <Tab>Warehouses</Tab>
+              <Tab>Suppliers</Tab>
+              <Tab>Purchases</Tab>
+              <Tab>Sales</Tab>
+            </TabList>
 
-          <TabPanel>
-            <Product />
-          </TabPanel>
-          <TabPanel>
-            <Inventory />
-          </TabPanel>
-          <TabPanel>
-            <Warehouse />
-          </TabPanel>
-          <TabPanel>
-            <Supplier />
-          </TabPanel>
-          <TabPanel>
-            <Purchase />
-          </TabPanel>
-          <TabPanel>
-            <Sale />
-          </TabPanel>
-        </Tabs>
-      </div>
-        <div className='main-section-container'>
-            <h1>Content Page</h1>
-            <p>This is the Content page component.</p>
+            <TabPanel>
+              <Product />
+            </TabPanel>
+            <TabPanel>
+              <Inventory />
+            </TabPanel>
+            <TabPanel>
+              <Warehouse />
+            </TabPanel>
+            <TabPanel>
+              <Supplier />
+            </TabPanel>
+            <TabPanel>
+              <Purchase />
+            </TabPanel>
+            <TabPanel>
+              <Sale />
+            </TabPanel>
+          </Tabs>
         </div>
-        </>
-    );
+      </div>
+    </>
+  );
 };
 
 export default Console;

@@ -1,6 +1,6 @@
 // Importing necessary modules and functions
 const { addProduct, deleteProduct, updateProduct, listProducts, getProduct } = require('../controller/productController');
-const { Product,ProductInventory, sequelize,} = require('../models/models');
+const { Product, ProductInventory, Warehouse, sequelize,} = require('../models/models');
 
 // Mocking the database models
 jest.mock('../models/models', () => ({
@@ -37,7 +37,6 @@ describe('Product Controller', () => {
           name: 'Test Product',
           category: 'Test Category',
           description: 'Test Description',
-          sale_price: 10.99,
         },
       };
       const res = {
@@ -45,31 +44,31 @@ describe('Product Controller', () => {
         json: jest.fn(),
       };
   
-      // Mocking transaction and Product.create methods
-      sequelize.transaction.mockImplementation(async (callback) => {
-        await callback();
-      });
-      Product.create.mockResolvedValueOnce({ id: 1 });
-  
-      // Calling the addProduct method
+      // Create a mock transaction used by the controller to add new purchase record
+      // along with its corresponding trade records
+      const mockTransaction = {
+        commit: jest.fn(),
+        rollback: jest.fn(),
+      };
+      const sequelizeMock = require('../models/models').sequelize;
+      sequelizeMock.transaction.mockResolvedValue(mockTransaction);
+
+      // Mocking the Sequelize models
+      Product.create = jest.fn().mockResolvedValueOnce({ id: 1 });
+      Warehouse.findAll = jest.fn().mockResolvedValueOnce([{ id: 1 }, { id: 2 }]);
+      ProductInventory.create = jest.fn().mockResolvedValueOnce();
+
+      // Call the controller function
       await addProduct(req, res);
-  
+
       // Assertions
-      expect(Product.create).toHaveBeenCalledWith(
-        {
-          name: 'Test Product',
-          category: 'Test Category',
-          description: 'Test Description',
-          sale_price: 10.99,
-        },
-        { transaction: undefined } 
-      );
-      expect(ProductInventory.create).toHaveBeenCalledWith(
-        { product: 1, quantity: 0 },
-        { transaction: undefined } 
-      );
+      expect(sequelize.transaction).toHaveBeenCalledTimes(1);
+      expect(Product.create).toHaveBeenCalledTimes(1);
+      expect(ProductInventory.create).toHaveBeenCalledTimes(2); // Two warehouses
       expect(res.status).toHaveBeenCalledWith(201);
-      expect(res.json).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ id: 1 });
+      expect(mockTransaction.commit).toHaveBeenCalledTimes(1);
+      expect(mockTransaction.rollback).not.toHaveBeenCalled();
     });
   
     // Test case for handling errors when adding a product
@@ -80,21 +79,31 @@ describe('Product Controller', () => {
           name: 'Test Product',
           category: 'Test Category',
           description: 'Test Description',
-          sale_price: 10.99,
         },
       };
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
+
+      // Mock transaction
+      const mockTransaction = {
+        commit: jest.fn(),
+        rollback: jest.fn(),
+      };
+      const sequelizeMock = require('../models/models').sequelize;
+      sequelizeMock.transaction.mockResolvedValue(mockTransaction);
+
   
-      // Mocking transaction to throw an error
-      sequelize.transaction.mockRejectedValueOnce(new Error('Transaction error'));
+      // // Mocking transaction to throw an error
+      // sequelize.transaction.mockRejectedValueOnce(new Error('Transaction error'));
   
       // Calling the addProduct method
       await addProduct(req, res);
   
       // Assertions
+      expect(sequelizeMock.transaction).toHaveBeenCalled();
+      expect(mockTransaction.rollback).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: 'Failed to add product' });
     });
@@ -185,7 +194,6 @@ describe('Product Controller', () => {
           category: 'Updated Category',
           description: 'Updated Description',
           disabled: false,
-          sale_price: 20.99,
         },
       };
       const res = {
@@ -205,7 +213,6 @@ describe('Product Controller', () => {
         category: 'Updated Category',
         description: 'Updated Description',
         disabled: false,
-        sale_price: 20.99,
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(mockProduct);

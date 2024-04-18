@@ -9,9 +9,8 @@
 }
 
 .tabs-container {
-  width: 90%; /* 90% of the parent container width */
+  width: 100%; /* 90% of the parent container width */
   height: 90%;
-  padding: 20px;
 }
 
 .content {
@@ -141,3 +140,76 @@
   bottom: 0; /* Align to the bottom of the viewport */
   width: 100%; /* Full width */
 }
+
+
+/* Product.css */
+.product-container {
+  display: flex;
+}
+
+.product-table,
+.product-form {
+  width: 50%; /* Each section takes half of the container */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.product-table table {
+  width: 100%; /* Table takes full width of its container */
+  border-collapse: collapse; /* Collapse table borders */
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd; /* Add border to table cells */
+  padding: 8px; /* Add padding to table cells */
+  text-align: left; /* Align text to the left */
+}
+
+.product-table th {
+  background-color: #f2f2f2; /* Add background color to table headers */
+}
+
+.product-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-form label {
+  margin-bottom: 8px; /* Add margin below labels */
+}
+
+.product-form input,
+.product-form textarea {
+  padding: 8px; /* Add padding to form inputs */
+  margin-bottom: 16px; /* Add margin below inputs */
+  border: 1px solid #ddd; /* Add border to inputs */
+}
+
+/* Adjust form field layout */
+.product-form div {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.product-form label {
+  flex-basis: 30%; /* Set label width */
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.product-form input,
+.product-form textarea {
+  flex: 1; /* Take remaining space */
+}
+
+.product-form button {
+  padding: 8px 16px; /* Add padding to button */
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  cursor: pointer; /* Add pointer cursor */
+}
+
+.product-form button:hover {
+  background-color: #0056b3; /* Button background color on hover */
+}
+

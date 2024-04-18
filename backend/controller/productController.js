@@ -25,32 +25,36 @@ const getProduct = async (req, res) => {
 };
 
 async function addProduct(req, res) {
-    const { name, category, description, sale_price } = req.body;
-  
-    try {
-      await sequelize.transaction(async (t) => {
-        const product = await Product.create(
-          { name, category, description, sale_price },
-          { transaction: t }
-        );
+  const { name, category, description } = req.body;
+  const t = await sequelize.transaction();
+  try {
+      const product = await Product.create(
+        { name, category, description },
+        { transaction: t }
+      );
 
+      const warehouses = await Warehouse.findAll();
+
+      for (const warehouse of warehouses) {
         await ProductInventory.create(
-          { product: product.id, quantity: 0 }, 
+          { product: product.id, quantity: 0, warehouse: warehouse.id}, 
           { transaction: t }
         );
-  
-        res.status(201).json(product);
-      });
-    } catch (error) {
-      console.error('Error in adding product:', error);
-      res.status(500).json({ error: 'Failed to add product' });
-    }
+      }
+      
+      await t.commit();
+      res.status(201).json(product);
+  } catch (error) {
+    await t.rollback();
+    console.error('Error in adding product:', error);
+    res.status(500).json({ error: 'Failed to add product' });
   }
+}
 
 const updateProduct = async (req, res) => {
     try {
         const {id} = req.params;
-        const {name, category, description, disabled, sale_price} = req.body;
+        const {name, category, description, disabled} = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({error: 'Product not found.'});
@@ -59,8 +63,7 @@ const updateProduct = async (req, res) => {
             name,
             category,
             description,
-            disabled,
-            sale_price
+            disabled
         });
         return res.status(200).json(product);
 
