@@ -42,10 +42,6 @@ const Console = () => {
           </TabPanel>
         </Tabs>
       </div>
-        <div className='main-section-container'>
-            <h1>Content Page</h1>
-            <p>This is the Content page component.</p>
-        </div>
         </>
     );
 };
