@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Records Report</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trade Records Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Warehouse</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < purchases.length; i++) { %>
+                <% const purchase = purchases[i]; %>
+                <% for (let j = 0; j < purchase.tradeRecords.length; j++) { %>
+                    <% const tradeRecord = purchase.tradeRecords[j]; %>
+                    <tr>
+                        <td><%= tradeRecord.product.name %></td>
+                        <td><%= tradeRecord.warehouse.name %></td>
+                        <td><%= tradeRecord.quantity %></td>
+                        <td>$<%= tradeRecord.price %></td>
+                        <td>$<%= tradeRecord.quantity * tradeRecord.price %></td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
