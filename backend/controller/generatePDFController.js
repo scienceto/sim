@@ -41,11 +41,14 @@ async function generateTradeRecordsPDFs(req, res) {
 
             // Fetch trade records asynchronously
             for (const purchase of months[monthYear]) {
-                const tradeRecords = await db.TradeRecord.findAll({ where: { purchase: purchase.id } });
+                const tradeRecords = await db.TradeRecord.findAll({ where: { purchase: purchase.id }, include: [
+                    { model: db.Product, attributes: ['name'] },
+                    { model: db.Warehouse, attributes: ['name'] } 
+                  ] });
                 tradeRecords.forEach(tradeRecord => {
                     // Format and add trade record data to PDF
-                    doc.text(`Product: ${tradeRecord.product.name}`);
-                    doc.text(`Warehouse: ${tradeRecord.warehouse.name}`);
+                    doc.text(`Product: ${tradeRecord.Product.name}`);
+                    doc.text(`Warehouse: ${tradeRecord.Warehouse.name}`);
                     doc.text(`Quantity: ${tradeRecord.quantity}`);
                     doc.text(`Price: $${tradeRecord.price}`);
                     doc.text(`Total: $${tradeRecord.quantity * tradeRecord.price}`);
