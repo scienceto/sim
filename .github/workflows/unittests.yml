@@ -4,7 +4,7 @@ name: Test Case Workflow
 on:
   push:
     tags:
-      - 'feat-*'
+      - 'v*'
 
 # Define the jobs to be executed in this workflow
 jobs:
