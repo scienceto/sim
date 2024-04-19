@@ -9,6 +9,37 @@
 ## Quality Gate
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=scienceto_sim&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=scienceto_sim)
 
+## Executive Summary
+
+Our developed Inventory Management System (IMS) is meticulously crafted to cater to the intricate requirements of enterprises operating multiple storage facilities across diverse geographical zones within a nation. This innovative system is engineered to optimize and elevate the processes of inventory oversight, product administration, and data analytics. It delivers a streamlined and effective strategy for proprietors and administrators to manage their resources with precision and ease.
+
+### Product Description:
+
+- Product Management:
+  - Intuitive interface to add, modify, or remove products.
+  - Comprehensive tracking of product flow into and out of storage facilities(warehouses).
+
+- Stocking Orders:
+  - Simplified creation and oversight of stocking orders.
+  - Inventory levels automatically adjust upon order completion.
+
+- Financial Tracking:
+  - Instant generation of balance sheets for expedited financial assessments.
+  - Real-time tax computation ensures precise fiscal documentation.
+
+- Reports and Notifications:
+  - Access to detailed monthly acquisition reports in PDF/Excel formats.
+  - Configurable daily report dispatch via email.
+  - Proactive low stock level alerts delivered through email notifications.
+
+- Vendor Management:
+  - Centralized control of vendor details linked to inventory items.
+
+- Single Sign-On (SSO):
+  - Streamlined and secure authentication via Single Sign-On aligned with customer email domains.
+
+Our streamlined Inventory Management System (IMS) is engineered to elevate your operational workflow, featuring an intuitive interface coupled with key functionalities. Prioritizing efficiency and automation, our system is designed to bolster your team’s capability to oversee inventory with precision and support data-driven decision-making.
+
 ## Runtime Setup
 
 1. NPM Version: 10.5.0
