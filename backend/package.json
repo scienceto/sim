@@ -8,7 +8,7 @@
   },
   "scripts": {
     "seedData": "node config/dbSetup.js",
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "test": "jest --coverage"
   },
   "author": "",
@@ -24,7 +24,8 @@
     "pdf-creator-node": "^2.3.5",
     "pdfkit": "^0.15.0",
     "pg": "^8.11.3",
-    "sequelize": "^6.37.1"
+    "sequelize": "^6.37.1",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",

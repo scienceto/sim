@@ -183,14 +183,13 @@ const Product = sequelize.define('Product', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    category: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    }
 }, {
     tableName: "product",
     timestamps: false, // Disable timestamps (createdAt, updatedAt)
-});
-Product.belongsTo(ProductCategory, { foreignKey: {
-        name: 'category',
-        allowNull: true,
-    }, onDelete: 'SET NULL'
 });
 
 const ProductInventory = sequelize.define('ProductInventory', {

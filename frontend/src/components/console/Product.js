@@ -11,12 +11,20 @@ const Product = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/products`);
+      const idToken = localStorage.getItem('idToken');
+      console.log("ID token:", idToken);
+      const response = await fetch(`${apiBaseUrl}/products`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
       const data = await response.json();
       setProducts(data);
+      console.log("Products:", data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -37,15 +45,17 @@ const Product = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const idToken = localStorage.getItem('idToken');
       const response = await fetch(`${apiBaseUrl}/products`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`
         },
         body: JSON.stringify(formData)
       });
       if (!response.ok) {
-        throw new Error("Failed to add product");
+        throw new Error("Failed to add product", response);
       }
       // Reset form data
       setFormData({

@@ -8,7 +8,7 @@ import Purchase from './console/Purchase';
 import Sale from './console/Sale';
 import '../App.css';
 
-const Console = () => {
+const Console = ( { idToken } ) => {
   return (
     <>
       <div className='main-section-container'>
@@ -24,7 +24,7 @@ const Console = () => {
             </TabList>
 
             <TabPanel>
-              <Product />
+              <Product idToken={idToken} />
             </TabPanel>
             <TabPanel>
               <Inventory />

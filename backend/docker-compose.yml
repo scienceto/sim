@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sim_backend:
+    network_mode: host
+    image: sim-backend:latest
+    ports:
+      - 5000:5000
+    environment:
+      - DB_NAME=swen732
+      - DB_USERNAME=swen732
+      - DB_PASSWORD=12345
+      - DB_HOST=localhost
+      - SES_EMAIL_SENDER=jheelpatelscientist@gmail.com
+      - AWS_REGION=us-east-1

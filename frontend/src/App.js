@@ -1,4 +1,5 @@
 import './App.css';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './components/About';
@@ -8,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Console from './components/Console';
 // Imports the Amplify library from 'aws-amplify' package. This is used to configure your app to interact with AWS services.
 import { Amplify } from 'aws-amplify';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 // Imports the Authenticator and withAuthenticator components from '@aws-amplify/ui-react'.
 // Authenticator is a React component that provides a ready-to-use sign-in and sign-up UI.
@@ -24,6 +26,23 @@ import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
 function App() {
+  const [idToken, setIdToken] = useState(null);
+
+  useEffect(() => {
+    const fetchIdToken = async () => {
+      try {
+        const idToken = (await fetchAuthSession()).tokens?.idToken?.toString();
+        setIdToken(idToken);
+        localStorage.setItem('idToken', idToken);
+      } catch (error) {
+        console.error('Error fetching id token:', error);
+      }
+    };
+
+    fetchIdToken();
+  }, []);
+
+
   return (
     <div className="App">
       <Authenticator socialProviders={['amazon', 'apple', 'facebook', 'google']}>
@@ -46,7 +65,7 @@ function App() {
                 />
                 <Route
                   path='/console'
-                  element={<Console />}
+                  element={<Console idToken={idToken} />}
                 />
               </Routes>
             </Router>

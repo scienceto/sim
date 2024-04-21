@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "swen6148153b979": {}
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
       }
     }
   }

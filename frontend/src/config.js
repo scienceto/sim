@@ -1,1 +1,1 @@
-module.exports.apiBaseUrl = 'http://localhost:5000'
+module.exports.apiBaseUrl = 'https://gksowlx1v0.execute-api.us-east-1.amazonaws.com'
