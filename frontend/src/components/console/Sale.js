@@ -13,12 +13,12 @@ const Sale = () => {
     try {
       const response = await fetch(`${apiBaseUrl}/sales`);
       if (!response.ok) {
-        throw new Error("Failed to fetch products");
+        throw new Error("Failed to fetch sales");
       }
       const data = await response.json();
       setSales(data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching sales:", error);
     }
   };
 

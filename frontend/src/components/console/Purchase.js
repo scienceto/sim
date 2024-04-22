@@ -13,12 +13,12 @@ const Purchase = () => {
     try {
       const response = await fetch(`${apiBaseUrl}/purchases`);
       if (!response.ok) {
-        throw new Error("Failed to fetch products");
+        throw new Error("Failed to fetch purchases");
       }
       const data = await response.json();
       setPurchases(data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching purchases:", error);
     }
   };
 
