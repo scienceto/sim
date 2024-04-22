@@ -1,34 +1,34 @@
 import { useState, useEffect } from "react";
 import { apiBaseUrl } from "../../config";
 
-const Supplier = () => {
-  const [suppliers, setSuppliers] = useState([]);
+const Customer = () => {
+  const [customers, setCustomers] = useState([]);
   const [formData, setFormData] = useState({
     app_user: "",
     status: ""
   });
 
-  const fetchSuppliers = async () => {
+  const fetchCustomers = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/suppliers`);
+      const response = await fetch(`${apiBaseUrl}/cusotmers`);
       if (!response.ok) {
-        throw new Error("Failed to fetch suppliers");
+        throw new Error("Failed to fetch customers");
       }
       const data = await response.json();
-      setSuppliers(data);
+      setCustomers(data);
     } catch (error) {
-      console.error("Error fetching suppliers:", error);
+      console.error("Error fetching customers:", error);
     }
   };
 
   useEffect(() => {
-    fetchSuppliers();
+    fetchCustomers();
   }, []);
 
     return (
       <div className="product-container">
       <div className="product-table">
-        <h2>Suppliers</h2>
+        <h2>Customers</h2>
         <table>
           <thead>
             <tr>
@@ -52,7 +52,7 @@ const Supplier = () => {
         </table>
       </div>
       {/* <div className="product-form">
-        <h2>Add Suppliers</h2>
+        <h2>Add Customers</h2>
         <form>
           <div>
             <label>:</label>
@@ -66,12 +66,12 @@ const Supplier = () => {
             <label>Description:</label>
             <textarea name="description" value={formData.description}  />
           </div>
-          <button type="submit">Add Suppliers</button>
+          <button type="submit">Add Customers</button>
         </form>
       </div> */}
     </div>
     );
   };
   
-  export default Supplier;
+  export default Customer;
   
