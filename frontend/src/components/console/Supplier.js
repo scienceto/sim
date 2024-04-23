@@ -25,6 +25,42 @@ const Supplier = () => {
     fetchSuppliers();
   }, []);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const idToken = localStorage.getItem('idToken');
+      const response = await fetch(`${apiBaseUrl}/suppliers`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`
+        },
+        body: JSON.stringify(formData)
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add supplier", response);
+      }
+      // Reset form data
+      setFormData({
+        name: "",
+        address: "",
+        metadata: ""
+      });
+      // Refresh suppliers list
+      fetchSuppliers();
+    } catch (error) {
+      console.error("Error adding supplier:", error);
+    }
+  };
+
     return (
       <div className="product-container">
       <div className="product-table">
@@ -35,40 +71,40 @@ const Supplier = () => {
               <th>ID</th>
               <th>Name</th>
               <th>Address</th>
-              <th>Metadata</th>
+              <th>Description</th>
               {/* Add more table headers as needed */}
             </tr>
           </thead>
-          {/* <tbody>
-            {suppliers.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.category}</td>
-                <td>{product.description}</td>
+          <tbody>
+            {suppliers.map((supplier) => (
+              <tr key={supplier.id}>
+                <td>{supplier.id}</td>
+                <td>{supplier.name}</td>
+                <td>{supplier.address}</td>
+                <td>{supplier.metadata}</td>
               </tr>
             ))}
-          </tbody> */}
+          </tbody>
         </table>
       </div>
-      {/* <div className="product-form">
-        <h2>Add Suppliers</h2>
-        <form>
+      <div className="product-form">
+        <h2>Add Supplier</h2>
+        <form onSubmit={handleSubmit}>
           <div>
-            <label>:</label>
-            <input type="text" name="name" value={formData.name} />
+            <label>Name:</label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} />
           </div>
           <div>
-            <label>Category:</label>
-            <input type="text" name="category" value={formData.category} />
+            <label>Address:</label>
+            <input type="text" name="address" value={formData.address} onChange={handleChange} />
           </div>
           <div>
             <label>Description:</label>
-            <textarea name="description" value={formData.description}  />
+            <textarea name="metadata" value={formData.metadata} onChange={handleChange} />
           </div>
-          <button type="submit">Add Suppliers</button>
+          <button type="submit">Add Supplier</button>
         </form>
-      </div> */}
+      </div>
     </div>
     );
   };
