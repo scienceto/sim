@@ -37,9 +37,9 @@ const Inventory = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Warehouse</th>
               <th>Product</th>
               <th>Quantity</th>
+              <th>Warehouse</th>
               {/* Add more table headers as needed */}
             </tr>
           </thead>
@@ -47,9 +47,9 @@ const Inventory = () => {
             {inventory.map((data) => (
               <tr key={data.id}>
                 <td>{data.id}</td>
-                <td>{data.warehouse_name}</td>
-                <td>{data.product_name}</td>
+                <td>{data.product}</td>
                 <td>{data.quantity}</td>
+                <td>{data.warehouse}</td>
               </tr>
             ))}
           </tbody>
